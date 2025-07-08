@@ -1,3 +1,5 @@
+mkdir -p logs  # 로그 디렉토리 없으면 생성
+
 SEED=1
 if [ -z "$MODEL" ]; then
     # MODEL=EleutherAI/pythia-6.9b-deduped
@@ -9,6 +11,11 @@ LR=3e-6
 REWARD_MODEL_PATH=models/$MODEL/reward_model_basic_$SEED
 SFT_MODEL_PATH=models/$MODEL/sft_model_$SEED
 POLICY_MODEL_PATH=models/$MODEL/policy_model_$SEED
+
+# 로그 이름 자동 설정
+NOW=$(date +"%Y%m%d_%H%M%S")
+MODEL_NAME_SAFE=${MODEL//\//_}
+LOGFILE="logs/reward_basic_${MODEL_NAME_SAFE}_seed${SEED}_${NOW}.txt"
 
 # vary the following parameters to fit your GPU memory
 local_rollout_forward_batch_size=2 # smaller fits better on GPU
@@ -45,8 +52,7 @@ CUDA_VISIBLE_DEVICES=0 poetry run accelerate launch --config_file deepspeed.yaml
     --output_dir=$REWARD_MODEL_PATH \
     --no-push-to-hub \
     --local_eval_batch_size=$local_eval_batch_size \
-    --seed=$SEED 
-
+    --seed=$SEED 2>&1 | tee "$LOGFILE"
 
 # CUDA_VISIBLE_DEVICES=0 poetry run accelerate launch --config_file deepspeed.yaml \
 #     --main_process_port=29510 \

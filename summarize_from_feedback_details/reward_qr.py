@@ -71,7 +71,7 @@ class Args:
     # various batch sizes
     world_size: Optional[int] = None
     """The number of processes (GPUs) to use"""
-    num_train_epochs: int = 1
+    num_train_epochs: int = 5 # 1
     """Number of epochs to train"""
     num_updates: Optional[int] = None
     """The number of updates to train"""
@@ -79,7 +79,7 @@ class Args:
     """The number of gradient accumulation steps"""
     local_micro_batch_size: Optional[int] = 1
     """The micro batch size per GPU (HF's `per_device_train_batch_size`)"""
-    total_episodes: Optional[int] = 92832 
+    total_episodes: Optional[int] = 92832
     """The total number of episodes in the dataset"""
     micro_batch_size: Optional[int] = None
     """The micro batch size across devices (HF's `per_device_train_batch_size` * `world_size`)"""
@@ -315,7 +315,7 @@ def get_quantile_expected_reward(model, query_responses, tokenizer, context_leng
     # 디버깅 출력
     # print(f"quantile_expected_rewards shape: {quantile_expected_rewards.shape}")
     
-    # TODO: 차원이 기존 코드랑 다르다. [2B, T, 1] 형태로 반환하는게 맞는지 확인 필요, 현재는 [2B] 형태로 반환
+    # logits [2B, T, N] 형태로 반환
     return quantile_logits, context_length
 
 # QR 버전 Loss 함수 
@@ -349,7 +349,7 @@ def evaluate(args: Args, accelerator, tokenizer, model, dataloader, eval_split=i
                 # 기존 코드
                 # predicted_reward = get_reward(model, query_responses, tokenizer)# [2B, T, 1]
                 
-                # QR 코드
+                # =========QR 코드======= 
                 # Quantile 기반 reward 기대값 추출
                 quantile_logits, context_length_1 = get_quantile_expected_reward(model, query_responses, tokenizer)  
 
@@ -367,7 +367,9 @@ def evaluate(args: Args, accelerator, tokenizer, model, dataloader, eval_split=i
                 # 마지막 토큰의 평균 reward 추출 -> [2B]
                 batch_indices = torch.arange(quantile_logits.size(0), device=quantile_logits.device)
                 quantile_expected_rewards = quantile_expected_logits[batch_indices, sequence_lengths].squeeze(-1)  # [2B]
-
+                # ======================
+                
+                
                 # === [추가] 보상 값 csv 저장용 ===
                 quantile_last_token = quantile_logits[batch_indices, sequence_lengths]  # [2B, N]
                 preferred_q = quantile_last_token[:data['query_chosen_token'].shape[0]].cpu().float().numpy()
@@ -566,12 +568,12 @@ if __name__ == "__main__":
             query_responses = torch.cat((data["query_chosen_token"], data["query_rejected_token"]), dim=0)
             with accelerator.accumulate(model):
 
-                # QR 코드
+                # =========QR 코드======= 
                 quantile_logits, context_length_2 = get_quantile_expected_reward(model, query_responses, tokenizer) # [2B]
-                
-                
-                # quantile expected value -> [2B, T, 1], 
                 # quantile_logits = [2, 638, 10]
+        
+                # quantile expected value -> [2B, T, 1], 
+                
                 quantile_expected_logits = quantile_logits.mean(dim=-1, keepdim=True)
                 # quantile_expected_logits = [2, 638, 1]
 
@@ -584,7 +586,7 @@ if __name__ == "__main__":
                 # 마지막 토큰의 평균 reward 추출 -> [2B]
                 batch_indices = torch.arange(quantile_logits.size(0), device=quantile_logits.device)
                 quantile_expected_rewards = quantile_expected_logits[batch_indices, sequence_lengths].squeeze(-1)  # [2B]
-                
+                 # ======================
                 
 
                 # Split
@@ -675,26 +677,28 @@ if __name__ == "__main__":
             # cat_predicted_reward = get_reward(model, cat_query_responses, tokenizer, context_length=queries.shape[1])
             # predicted_reward = get_reward(model, query_responses, tokenizer) [2B, T, 1]
 
-            # QR 코드
+            # =========QR 코드=======
             quantile_logits, cat_context_length = get_quantile_expected_reward(model, cat_query_responses, tokenizer, context_length=queries.shape[1])
+            # quantile_logits = [2, 638, 10]
             
             # quantile expected value -> [2B, T, 1], 
-            # quantile_logits = [2, 638, 10]
+            
             quantile_expected_logits = quantile_logits.mean(dim=-1, keepdim=True)
             # quantile_expected_logits = [2, 638, 1]
 
             # 마지막 유효 토큰 인덱스 계산
             sequence_lengths = (
-                first_true_indices(query_responses[:, cat_context_length:] == tokenizer.pad_token_id)
+                first_true_indices(cat_query_responses[:, cat_context_length:] == tokenizer.pad_token_id)
                 - 1 + cat_context_length
             )  # [2B]
 
             # 마지막 토큰의 평균 reward 추출 -> [2B]
             batch_indices = torch.arange(quantile_logits.size(0), device=quantile_logits.device)
             cat_quantile_expected_rewards = quantile_expected_logits[batch_indices, sequence_lengths].squeeze(-1)  # [2B]
-            
+            # ======================
 
             
+            # =========QR 코드=======
             quantile_logits, context_length_3 = get_quantile_expected_reward(model, query_responses, tokenizer) 
 
             
@@ -712,7 +716,7 @@ if __name__ == "__main__":
             # 마지막 토큰의 평균 reward 추출 -> [2B]
             batch_indices = torch.arange(quantile_logits.size(0), device=quantile_logits.device)
             quantile_expected_rewards = quantile_expected_logits[batch_indices, sequence_lengths].squeeze(-1)  # [2B]
-            
+            # ======================
             
 
             unexpecte_reward_diff = quantile_expected_rewards - cat_quantile_expected_rewards

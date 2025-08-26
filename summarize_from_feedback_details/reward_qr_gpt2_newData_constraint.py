@@ -156,7 +156,7 @@ def disable_dropout(model: torch.nn.Module):
     for module in model.modules():
         if isinstance(module, torch.nn.Dropout):
             module.p = 0
-
+#''
 
 def print_rich_table(title: str, df: pd.DataFrame, console: Console) -> Table:
     table = Table(show_lines=True)

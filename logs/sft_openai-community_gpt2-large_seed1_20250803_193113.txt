@@ -1,0 +1,13 @@
+Creating virtualenv summarize-from-feedback-details-JoyFS6It-py3.12 in /home/hail/.cache/pypoetry/virtualenvs
+ipex flag is deprecated, will be removed in Accelerate v1.10. From 2.7.0, PyTorch has all needed optimizations for Intel CPU and XPU.
+Traceback (most recent call last):
+  File "/home/hail/anaconda3/bin/accelerate", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/hail/anaconda3/lib/python3.12/site-packages/accelerate/commands/accelerate_cli.py", line 50, in main
+    args.func(args)
+  File "/home/hail/anaconda3/lib/python3.12/site-packages/accelerate/commands/launch.py", line 1184, in launch_command
+    deepspeed_launcher(args)
+  File "/home/hail/anaconda3/lib/python3.12/site-packages/accelerate/commands/launch.py", line 829, in deepspeed_launcher
+    raise ImportError("DeepSpeed is not installed => run `pip3 install deepspeed` or build it from source.")
+ImportError: DeepSpeed is not installed => run `pip3 install deepspeed` or build it from source.

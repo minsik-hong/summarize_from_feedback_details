@@ -1,0 +1,561 @@
+Using RTX 3090 or 4000 series which doesn't support faster communication speedups. Ensuring P2P and IB communications are disabled.
+[2025-07-21 16:03:27,247] torch.distributed.run: [WARNING] 
+[2025-07-21 16:03:27,247] torch.distributed.run: [WARNING] *****************************************
+[2025-07-21 16:03:27,247] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2025-07-21 16:03:27,247] torch.distributed.run: [WARNING] *****************************************
+[2025-07-21 16:03:31,313] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-21 16:03:31,319] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-21 16:03:31,833] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-07-21 16:03:31,833] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-07-21 16:03:31,833] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+Loading cached shuffled indices for dataset at /home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec/cache-44a53ed13479c1a9.arrow
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+Loading cached shuffled indices for dataset at /home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec/cache-1432d7c823cb53fd.arrow
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+The number of samples in validation_dataset 83802
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+The number of samples in validation_dataset 2284
+The number of samples in dataset 92832
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/vwxyzjn___parquet/vwxyzjn--summarize_from_feedback_oai_preprocessing_1706381144-cf4f6ab92d8d9b56/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+wandb: Currently logged in as: hmin7781 (hails). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.21.0 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.4
+wandb: Run data is saved locally in /home/hail/Distribution_RLHF/summarize_from_feedback_details/wandb/run-20250721_160340-6uf9esnv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run reward_basic__1__1753081411
+wandb: ⭐️ View project at https://wandb.ai/hails/tldr_summarize
+wandb: 🚀 View run at https://wandb.ai/hails/tldr_summarize/runs/6uf9esnv
+Args(
+│   exp_name='reward_basic',
+│   seed=1,
+│   cuda=True,
+│   run_name='reward_basic__1__1753081411',
+│   load_from_cache_file=False,
+│   deepspeed=True,
+│   print_sample_output_freq=220,
+│   run_eval=True,
+│   eps=1e-05,
+│   lr=3e-06,
+│   optimizer='adamw',
+│   scheduler='cosine',
+│   warm_up_steps=0,
+│   world_size=2,
+│   num_train_epochs=5,
+│   num_updates=181,
+│   gradient_accumulation_steps=64,
+│   local_micro_batch_size=4,
+│   total_episodes=92832,
+│   micro_batch_size=8,
+│   local_batch_size=256,
+│   batch_size=512,
+│   local_eval_batch_size=1,
+│   base_model='EleutherAI/pythia-410m-deduped',
+│   query_dataset='vwxyzjn/summarize_from_feedback_tldr_3_filtered_oai_preprocessing_1706381144',
+│   reward_model_path='',
+│   sft_model_path='models/EleutherAI/pythia-410m-deduped/sft_model_1',
+│   label_dataset='vwxyzjn/summarize_from_feedback_oai_preprocessing_1706381144',
+│   track=True,
+│   wandb_project_name='tldr_summarize',
+│   wandb_entity=None,
+│   push_to_hub=False,
+│   hf_entity=None,
+│   hf_repo_id=None,
+│   hf_repo_revision=None,
+│   hf_repo_url=None,
+│   output_dir='models/EleutherAI/pythia-410m-deduped/reward_model_basic_1'
+)
+GPTNeoXConfig {
+  "_name_or_path": "models/EleutherAI/pythia-410m-deduped/sft_model_1",
+  "architectures": [
+│   "GPTNeoXForCausalLM"
+  ],
+  "attention_dropout": 0.0,
+  "bos_token_id": 0,
+  "classifier_dropout": 0.1,
+  "eos_token_id": 0,
+  "hidden_act": "gelu",
+  "hidden_dropout": 0.0,
+  "hidden_size": 1024,
+  "initializer_range": 0.02,
+  "intermediate_size": 4096,
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 2048,
+  "model_type": "gpt_neox",
+  "num_attention_heads": 16,
+  "num_hidden_layers": 24,
+  "rope_scaling": null,
+  "rotary_emb_base": 10000,
+  "rotary_pct": 0.25,
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": "4.33.2",
+  "use_cache": true,
+  "use_parallel_residual": true,
+  "vocab_size": 50304
+}
+[2025-07-21 16:03:52,262] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed info: version=0.12.6, git-hash=unknown, git-branch=unknown
+[2025-07-21 16:03:52,692] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2025-07-21 16:03:52,694] [INFO] [logging.py:96:log_dist] [Rank 0] Using client Optimizer as basic optimizer
+[2025-07-21 16:03:52,694] [INFO] [logging.py:96:log_dist] [Rank 0] Removing param_group that has no 'params' in the basic Optimizer
+[2025-07-21 16:03:52,717] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Basic Optimizer = AdamW
+[2025-07-21 16:03:52,717] [INFO] [utils.py:56:is_zero_supported_optimizer] Checking ZeRO support for optimizer=AdamW type=<class 'torch.optim.adamw.AdamW'>
+[2025-07-21 16:03:52,717] [INFO] [logging.py:96:log_dist] [Rank 0] Creating torch.bfloat16 ZeRO stage 2 optimizer
+[2025-07-21 16:03:52,718] [INFO] [stage_1_and_2.py:148:__init__] Reduce bucket size 500,000,000
+[2025-07-21 16:03:52,718] [INFO] [stage_1_and_2.py:149:__init__] Allgather bucket size 500,000,000
+[2025-07-21 16:03:52,718] [INFO] [stage_1_and_2.py:150:__init__] CPU Offload: False
+[2025-07-21 16:03:52,718] [INFO] [stage_1_and_2.py:151:__init__] Round robin gradient partitioning: False
+[2025-07-21 16:03:53,408] [INFO] [utils.py:791:see_memory_usage] Before initializing optimizer states
+[2025-07-21 16:03:53,409] [INFO] [utils.py:792:see_memory_usage] MA 1.41 GB         Max_MA 1.74 GB         CA 2.12 GB         Max_CA 2 GB 
+[2025-07-21 16:03:53,409] [INFO] [utils.py:799:see_memory_usage] CPU Virtual Memory:  used = 17.28 GB, percent = 9.2%
+[2025-07-21 16:03:53,566] [INFO] [utils.py:791:see_memory_usage] After initializing optimizer states
+[2025-07-21 16:03:53,567] [INFO] [utils.py:792:see_memory_usage] MA 2.73 GB         Max_MA 4.05 GB         CA 4.76 GB         Max_CA 5 GB 
+[2025-07-21 16:03:53,567] [INFO] [utils.py:799:see_memory_usage] CPU Virtual Memory:  used = 17.36 GB, percent = 9.2%
+[2025-07-21 16:03:53,568] [INFO] [stage_1_and_2.py:516:__init__] optimizer state initialized
+[2025-07-21 16:03:53,703] [INFO] [utils.py:791:see_memory_usage] After initializing ZeRO optimizer
+[2025-07-21 16:03:53,704] [INFO] [utils.py:792:see_memory_usage] MA 2.73 GB         Max_MA 2.73 GB         CA 4.76 GB         Max_CA 5 GB 
+[2025-07-21 16:03:53,704] [INFO] [utils.py:799:see_memory_usage] CPU Virtual Memory:  used = 17.34 GB, percent = 9.2%
+[2025-07-21 16:03:53,707] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Final Optimizer = AdamW
+[2025-07-21 16:03:53,707] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed using client LR scheduler
+[2025-07-21 16:03:53,707] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed LR Scheduler = None
+[2025-07-21 16:03:53,707] [INFO] [logging.py:96:log_dist] [Rank 0] step=0, skipped=0, lr=[3e-06], mom=[(0.9, 0.999)]
+[2025-07-21 16:03:53,708] [INFO] [config.py:984:print] DeepSpeedEngine configuration:
+[2025-07-21 16:03:53,708] [INFO] [config.py:988:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2025-07-21 16:03:53,708] [INFO] [config.py:988:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2025-07-21 16:03:53,708] [INFO] [config.py:988:print]   amp_enabled .................. False
+[2025-07-21 16:03:53,708] [INFO] [config.py:988:print]   amp_params ................... False
+[2025-07-21 16:03:53,708] [INFO] [config.py:988:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   bfloat16_enabled ............. True
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   checkpoint_parallel_write_pipeline  False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   checkpoint_tag_validation_enabled  True
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   checkpoint_tag_validation_fail  False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x7554b7f9be20>
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   communication_data_type ...... None
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   curriculum_enabled_legacy .... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   curriculum_params_legacy ..... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'curriculum_learning': {'enabled': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   data_efficiency_enabled ...... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   dataloader_drop_last ......... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   disable_allgather ............ False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   dump_state ................... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   dynamic_loss_scale_args ...... None
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_enabled ........... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_gas_boundary_resolution  1
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_layer_num ......... 0
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_max_iter .......... 100
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_stability ......... 1e-06
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_tol ............... 0.01
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   eigenvalue_verbose ........... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   elasticity_enabled ........... False
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   fp16_auto_cast ............... None
+[2025-07-21 16:03:53,709] [INFO] [config.py:988:print]   fp16_enabled ................. False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   fp16_master_weights_and_gradients  False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   global_rank .................. 0
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   grad_accum_dtype ............. None
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   gradient_accumulation_steps .. 64
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   gradient_clipping ............ 0.0
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   gradient_predivide_factor .... 1.0
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   graph_harvesting ............. False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   initial_dynamic_scale ........ 1
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   load_universal_checkpoint .... False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   loss_scale ................... 1.0
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   memory_breakdown ............. False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   mics_hierarchial_params_gather  False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   mics_shard_size .............. -1
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') enabled=False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   optimizer_legacy_fusion ...... False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   optimizer_name ............... None
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   optimizer_params ............. None
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0, 'pipe_partitioned': True, 'grad_partitioned': True}
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   pld_enabled .................. False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   pld_params ................... False
+[2025-07-21 16:03:53,710] [INFO] [config.py:988:print]   prescale_gradients ........... False
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   scheduler_name ............... None
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   scheduler_params ............. None
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   seq_parallel_communication_data_type  torch.float32
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   sparse_attention ............. None
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   sparse_gradients_enabled ..... False
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   steps_per_print .............. inf
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   train_batch_size ............. 512
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   train_micro_batch_size_per_gpu  4
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   use_data_before_expert_parallel_  False
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   use_node_local_storage ....... False
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   wall_clock_breakdown ......... False
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   weight_quantization_config ... None
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   world_size ................... 2
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   zero_allow_untested_optimizer  True
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   zero_config .................. stage=2 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=500,000,000 use_multi_rank_bucket_allreduce=True allgather_partitions=True allgather_bucket_size=500,000,000 overlap_comm=False load_from_fp32_weights=True elastic_checkpoint=False offload_param=DeepSpeedZeroOffloadParamConfig(device='none', nvme_path=None, buffer_count=5, buffer_size=100,000,000, max_in_cpu=1,000,000,000, pin_memory=False) offload_optimizer=DeepSpeedZeroOffloadOptimizerConfig(device='none', nvme_path=None, buffer_count=4, pin_memory=False, pipeline=False, pipeline_read=False, pipeline_write=False, fast_init=False, ratio=1.0) sub_group_size=1,000,000,000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50,000,000 param_persistence_threshold=100,000 model_persistence_threshold=sys.maxsize max_live_parameters=1,000,000,000 max_reuse_distance=1,000,000,000 gather_16bit_weights_on_model_save=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_nontrainable_weights=False zero_quantized_gradients=False mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True pipeline_loading_checkpoint=False override_module_apply=True
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   zero_enabled ................. True
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   zero_force_ds_cpu_optimizer .. True
+[2025-07-21 16:03:53,711] [INFO] [config.py:988:print]   zero_optimization_stage ...... 2
+[2025-07-21 16:03:53,711] [INFO] [config.py:974:print_user_config]   json = {
+    "train_batch_size": 512, 
+    "train_micro_batch_size_per_gpu": 4, 
+    "gradient_accumulation_steps": 64, 
+    "zero_optimization": {
+        "stage": 2, 
+        "offload_optimizer": {
+            "device": "none", 
+            "nvme_path": null
+        }, 
+        "offload_param": {
+            "device": "none", 
+            "nvme_path": null
+        }, 
+        "stage3_gather_16bit_weights_on_model_save": false
+    }, 
+    "steps_per_print": inf, 
+    "bf16": {
+        "enabled": true
+    }, 
+    "fp16": {
+        "enabled": false
+    }, 
+    "zero_allow_untested_optimizer": true
+}
+===training model===
+epoch: 0
+/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py:1652: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at ../torch/csrc/tensor/python_tensor.cpp:83.)
+  total_norm_cuda = get_accelerator().FloatTensor([float(total_norm)])
+/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py:1652: UserWarning: The torch.cuda.*DtypeTensor constructors are no longer recommended. It's best to use methods such as torch.tensor(data, dtype=*, device='cuda') to create tensors. (Triggered internally at ../torch/csrc/tensor/python_tensor.cpp:83.)
+  total_norm_cuda = get_accelerator().FloatTensor([float(total_norm)])
+train_accuracy=0.470703125, scheduler.get_last_lr()=[2.999990962185687e-06], optimizer.param_groups[0]['lr']=2.999990962185687e-06, update=65
+train_accuracy=0.529296875, scheduler.get_last_lr()=[2.9999638488516584e-06], optimizer.param_groups[0]['lr']=2.9999638488516584e-06, update=129
+train_accuracy=0.5234375, scheduler.get_last_lr()=[2.9999186603246404e-06], optimizer.param_groups[0]['lr']=2.9999186603246404e-06, update=193
+train_accuracy=0.494140625, scheduler.get_last_lr()=[2.9998553971491745e-06], optimizer.param_groups[0]['lr']=2.9998553971491745e-06, update=257
+train_accuracy=0.57421875, scheduler.get_last_lr()=[2.9997740600876078e-06], optimizer.param_groups[0]['lr']=2.9997740600876078e-06, update=321
+train_accuracy=0.5234375, scheduler.get_last_lr()=[2.999674650120086e-06], optimizer.param_groups[0]['lr']=2.999674650120086e-06, update=385
+train_accuracy=0.529296875, scheduler.get_last_lr()=[2.999557168444541e-06], optimizer.param_groups[0]['lr']=2.999557168444541e-06, update=449
+train_accuracy=0.5234375, scheduler.get_last_lr()=[2.9994216164766768e-06], optimizer.param_groups[0]['lr']=2.9994216164766768e-06, update=513
+train_accuracy=0.5390625, scheduler.get_last_lr()=[2.999267995849951e-06], optimizer.param_groups[0]['lr']=2.999267995849951e-06, update=577
+train_accuracy=0.55859375, scheduler.get_last_lr()=[2.9990963084155556e-06], optimizer.param_groups[0]['lr']=2.9990963084155556e-06, update=641
+train_accuracy=0.568359375, scheduler.get_last_lr()=[2.998906556242398e-06], optimizer.param_groups[0]['lr']=2.998906556242398e-06, update=705
+train_accuracy=0.546875, scheduler.get_last_lr()=[2.9986987416170696e-06], optimizer.param_groups[0]['lr']=2.9986987416170696e-06, update=769
+train_accuracy=0.576171875, scheduler.get_last_lr()=[2.9984728670438247e-06], optimizer.param_groups[0]['lr']=2.9984728670438247e-06, update=833
+train_accuracy=0.568359375, scheduler.get_last_lr()=[2.998228935244547e-06], optimizer.param_groups[0]['lr']=2.998228935244547e-06, update=897
+train_accuracy=0.578125, scheduler.get_last_lr()=[2.9979669491587155e-06], optimizer.param_groups[0]['lr']=2.9979669491587155e-06, update=961
+train_accuracy=0.572265625, scheduler.get_last_lr()=[2.9976869119433734e-06], optimizer.param_groups[0]['lr']=2.9976869119433734e-06, update=1025
+train_accuracy=0.59375, scheduler.get_last_lr()=[2.9973888269730865e-06], optimizer.param_groups[0]['lr']=2.9973888269730865e-06, update=1089
+train_accuracy=0.587890625, scheduler.get_last_lr()=[2.997072697839903e-06], optimizer.param_groups[0]['lr']=2.997072697839903e-06, update=1153
+train_accuracy=0.576171875, scheduler.get_last_lr()=[2.9967385283533123e-06], optimizer.param_groups[0]['lr']=2.9967385283533123e-06, update=1217
+train_accuracy=0.552734375, scheduler.get_last_lr()=[2.9963863225401956e-06], optimizer.param_groups[0]['lr']=2.9963863225401956e-06, update=1281
+train_accuracy=0.603515625, scheduler.get_last_lr()=[2.9960160846447815e-06], optimizer.param_groups[0]['lr']=2.9960160846447815e-06, update=1345
+train_accuracy=0.57421875, scheduler.get_last_lr()=[2.9956278191285914e-06], optimizer.param_groups[0]['lr']=2.9956278191285914e-06, update=1409
+train_accuracy=0.59765625, scheduler.get_last_lr()=[2.9952215306703877e-06], optimizer.param_groups[0]['lr']=2.9952215306703877e-06, update=1473
+train_accuracy=0.623046875, scheduler.get_last_lr()=[2.9947972241661165e-06], optimizer.param_groups[0]['lr']=2.9947972241661165e-06, update=1537
+train_accuracy=0.6171875, scheduler.get_last_lr()=[2.9943549047288494e-06], optimizer.param_groups[0]['lr']=2.9943549047288494e-06, update=1601
+train_accuracy=0.619140625, scheduler.get_last_lr()=[2.99389457768872e-06], optimizer.param_groups[0]['lr']=2.99389457768872e-06, update=1665
+train_accuracy=0.59375, scheduler.get_last_lr()=[2.9934162485928626e-06], optimizer.param_groups[0]['lr']=2.9934162485928626e-06, update=1729
+train_accuracy=0.607421875, scheduler.get_last_lr()=[2.992919923205344e-06], optimizer.param_groups[0]['lr']=2.992919923205344e-06, update=1793
+train_accuracy=0.62109375, scheduler.get_last_lr()=[2.9924056075070916e-06], optimizer.param_groups[0]['lr']=2.9924056075070916e-06, update=1857
+train_accuracy=0.611328125, scheduler.get_last_lr()=[2.991873307695826e-06], optimizer.param_groups[0]['lr']=2.991873307695826e-06, update=1921
+train_accuracy=0.583984375, scheduler.get_last_lr()=[2.991323030185983e-06], optimizer.param_groups[0]['lr']=2.991323030185983e-06, update=1985
+train_accuracy=0.615234375, scheduler.get_last_lr()=[2.9907547816086372e-06], optimizer.param_groups[0]['lr']=2.9907547816086372e-06, update=2049
+train_accuracy=0.58984375, scheduler.get_last_lr()=[2.990168568811422e-06], optimizer.param_groups[0]['lr']=2.990168568811422e-06, update=2113
+train_accuracy=0.64453125, scheduler.get_last_lr()=[2.989564398858447e-06], optimizer.param_groups[0]['lr']=2.989564398858447e-06, update=2177
+train_accuracy=0.56640625, scheduler.get_last_lr()=[2.988942279030214e-06], optimizer.param_groups[0]['lr']=2.988942279030214e-06, update=2241
+train_accuracy=0.58984375, scheduler.get_last_lr()=[2.9883022168235276e-06], optimizer.param_groups[0]['lr']=2.9883022168235276e-06, update=2305
+train_accuracy=0.61328125, scheduler.get_last_lr()=[2.9876442199514048e-06], optimizer.param_groups[0]['lr']=2.9876442199514048e-06, update=2369
+train_accuracy=0.611328125, scheduler.get_last_lr()=[2.986968296342984e-06], optimizer.param_groups[0]['lr']=2.986968296342984e-06, update=2433
+train_accuracy=0.61328125, scheduler.get_last_lr()=[2.9862744541434285e-06], optimizer.param_groups[0]['lr']=2.9862744541434285e-06, update=2497
+train_accuracy=0.603515625, scheduler.get_last_lr()=[2.9855627017138272e-06], optimizer.param_groups[0]['lr']=2.9855627017138272e-06, update=2561
+train_accuracy=0.61328125, scheduler.get_last_lr()=[2.984833047631095e-06], optimizer.param_groups[0]['lr']=2.984833047631095e-06, update=2625
+train_accuracy=0.580078125, scheduler.get_last_lr()=[2.9840855006878694e-06], optimizer.param_groups[0]['lr']=2.9840855006878694e-06, update=2689
+train_accuracy=0.607421875, scheduler.get_last_lr()=[2.983320069892405e-06], optimizer.param_groups[0]['lr']=2.983320069892405e-06, update=2753
+train_accuracy=0.56640625, scheduler.get_last_lr()=[2.9825367644684628e-06], optimizer.param_groups[0]['lr']=2.9825367644684628e-06, update=2817
+train_accuracy=0.630859375, scheduler.get_last_lr()=[2.981735593855202e-06], optimizer.param_groups[0]['lr']=2.981735593855202e-06, update=2881
+train_accuracy=0.6171875, scheduler.get_last_lr()=[2.980916567707064e-06], optimizer.param_groups[0]['lr']=2.980916567707064e-06, update=2945
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.980079695893657e-06], optimizer.param_groups[0]['lr']=2.980079695893657e-06, update=3009
+train_accuracy=0.603515625, scheduler.get_last_lr()=[2.979224988499637e-06], optimizer.param_groups[0]['lr']=2.979224988499637e-06, update=3073
+train_accuracy=0.61328125, scheduler.get_last_lr()=[2.9783524558245867e-06], optimizer.param_groups[0]['lr']=2.9783524558245867e-06, update=3137
+train_accuracy=0.603515625, scheduler.get_last_lr()=[2.9774621083828907e-06], optimizer.param_groups[0]['lr']=2.9774621083828907e-06, update=3201
+train_accuracy=0.6171875, scheduler.get_last_lr()=[2.9765539569036082e-06], optimizer.param_groups[0]['lr']=2.9765539569036082e-06, update=3265
+train_accuracy=0.6640625, scheduler.get_last_lr()=[2.9756280123303453e-06], optimizer.param_groups[0]['lr']=2.9756280123303453e-06, update=3329
+train_accuracy=0.646484375, scheduler.get_last_lr()=[2.974684285821122e-06], optimizer.param_groups[0]['lr']=2.974684285821122e-06, update=3393
+train_accuracy=0.60546875, scheduler.get_last_lr()=[2.973722788748239e-06], optimizer.param_groups[0]['lr']=2.973722788748239e-06, update=3457
+train_accuracy=0.6171875, scheduler.get_last_lr()=[2.972743532698138e-06], optimizer.param_groups[0]['lr']=2.972743532698138e-06, update=3521
+train_accuracy=0.626953125, scheduler.get_last_lr()=[2.971746529471265e-06], optimizer.param_groups[0]['lr']=2.971746529471265e-06, update=3585
+train_accuracy=0.62890625, scheduler.get_last_lr()=[2.970731791081927e-06], optimizer.param_groups[0]['lr']=2.970731791081927e-06, update=3649
+train_accuracy=0.626953125, scheduler.get_last_lr()=[2.9696993297581476e-06], optimizer.param_groups[0]['lr']=2.9696993297581476e-06, update=3713
+train_accuracy=0.59375, scheduler.get_last_lr()=[2.968649157941517e-06], optimizer.param_groups[0]['lr']=2.968649157941517e-06, update=3777
+train_accuracy=0.630859375, scheduler.get_last_lr()=[2.967581288287046e-06], optimizer.param_groups[0]['lr']=2.967581288287046e-06, update=3841
+train_accuracy=0.634765625, scheduler.get_last_lr()=[2.966495733663012e-06], optimizer.param_groups[0]['lr']=2.966495733663012e-06, update=3905
+train_accuracy=0.638671875, scheduler.get_last_lr()=[2.9653925071508033e-06], optimizer.param_groups[0]['lr']=2.9653925071508033e-06, update=3969
+train_accuracy=0.638671875, scheduler.get_last_lr()=[2.964271622044761e-06], optimizer.param_groups[0]['lr']=2.964271622044761e-06, update=4033
+train_accuracy=0.611328125, scheduler.get_last_lr()=[2.9631330918520206e-06], optimizer.param_groups[0]['lr']=2.9631330918520206e-06, update=4097
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.9619769302923485e-06], optimizer.param_groups[0]['lr']=2.9619769302923485e-06, update=4161
+train_accuracy=0.609375, scheduler.get_last_lr()=[2.960803151297976e-06], optimizer.param_groups[0]['lr']=2.960803151297976e-06, update=4225
+train_accuracy=0.66015625, scheduler.get_last_lr()=[2.959611769013431e-06], optimizer.param_groups[0]['lr']=2.959611769013431e-06, update=4289
+train_accuracy=0.634765625, scheduler.get_last_lr()=[2.9584027977953697e-06], optimizer.param_groups[0]['lr']=2.9584027977953697e-06, update=4353
+train_accuracy=0.640625, scheduler.get_last_lr()=[2.9571762522124025e-06], optimizer.param_groups[0]['lr']=2.9571762522124025e-06, update=4417
+train_accuracy=0.6640625, scheduler.get_last_lr()=[2.9559321470449175e-06], optimizer.param_groups[0]['lr']=2.9559321470449175e-06, update=4481
+train_accuracy=0.642578125, scheduler.get_last_lr()=[2.954670497284903e-06], optimizer.param_groups[0]['lr']=2.954670497284903e-06, update=4545
+train_accuracy=0.62109375, scheduler.get_last_lr()=[2.9533913181357675e-06], optimizer.param_groups[0]['lr']=2.9533913181357675e-06, update=4609
+train_accuracy=0.640625, scheduler.get_last_lr()=[2.952094625012156e-06], optimizer.param_groups[0]['lr']=2.952094625012156e-06, update=4673
+train_accuracy=0.669921875, scheduler.get_last_lr()=[2.950780433539764e-06], optimizer.param_groups[0]['lr']=2.950780433539764e-06, update=4737
+train_accuracy=0.623046875, scheduler.get_last_lr()=[2.9494487595551497e-06], optimizer.param_groups[0]['lr']=2.9494487595551497e-06, update=4801
+train_accuracy=0.62109375, scheduler.get_last_lr()=[2.9480996191055418e-06], optimizer.param_groups[0]['lr']=2.9480996191055418e-06, update=4865
+train_accuracy=0.640625, scheduler.get_last_lr()=[2.9467330284486493e-06], optimizer.param_groups[0]['lr']=2.9467330284486493e-06, update=4929
+train_accuracy=0.669921875, scheduler.get_last_lr()=[2.9453490040524617e-06], optimizer.param_groups[0]['lr']=2.9453490040524617e-06, update=4993
+train_accuracy=0.6171875, scheduler.get_last_lr()=[2.9439475625950528e-06], optimizer.param_groups[0]['lr']=2.9439475625950528e-06, update=5057
+train_accuracy=0.67578125, scheduler.get_last_lr()=[2.94252872096438e-06], optimizer.param_groups[0]['lr']=2.94252872096438e-06, update=5121
+train_accuracy=0.625, scheduler.get_last_lr()=[2.9410924962580795e-06], optimizer.param_groups[0]['lr']=2.9410924962580795e-06, update=5185
+train_accuracy=0.640625, scheduler.get_last_lr()=[2.9396389057832604e-06], optimizer.param_groups[0]['lr']=2.9396389057832604e-06, update=5249
+train_accuracy=0.65625, scheduler.get_last_lr()=[2.9381679670562977e-06], optimizer.param_groups[0]['lr']=2.9381679670562977e-06, update=5313
+train_accuracy=0.642578125, scheduler.get_last_lr()=[2.9366796978026193e-06], optimizer.param_groups[0]['lr']=2.9366796978026193e-06, update=5377
+train_accuracy=0.6328125, scheduler.get_last_lr()=[2.935174115956493e-06], optimizer.param_groups[0]['lr']=2.935174115956493e-06, update=5441
+train_accuracy=0.61328125, scheduler.get_last_lr()=[2.9336512396608117e-06], optimizer.param_groups[0]['lr']=2.9336512396608117e-06, update=5505
+train_accuracy=0.666015625, scheduler.get_last_lr()=[2.932111087266872e-06], optimizer.param_groups[0]['lr']=2.932111087266872e-06, update=5569
+train_accuracy=0.685546875, scheduler.get_last_lr()=[2.9305536773341574e-06], optimizer.param_groups[0]['lr']=2.9305536773341574e-06, update=5633
+train_accuracy=0.62890625, scheduler.get_last_lr()=[2.9289790286301086e-06], optimizer.param_groups[0]['lr']=2.9289790286301086e-06, update=5697
+train_accuracy=0.654296875, scheduler.get_last_lr()=[2.927387160129903e-06], optimizer.param_groups[0]['lr']=2.927387160129903e-06, update=5761
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.9257780910162235e-06], optimizer.param_groups[0]['lr']=2.9257780910162235e-06, update=5825
+train_accuracy=0.642578125, scheduler.get_last_lr()=[2.9241518406790266e-06], optimizer.param_groups[0]['lr']=2.9241518406790266e-06, update=5889
+train_accuracy=0.658203125, scheduler.get_last_lr()=[2.922508428715311e-06], optimizer.param_groups[0]['lr']=2.922508428715311e-06, update=5953
+train_accuracy=0.64453125, scheduler.get_last_lr()=[2.9208478749288786e-06], optimizer.param_groups[0]['lr']=2.9208478749288786e-06, update=6017
+train_accuracy=0.6328125, scheduler.get_last_lr()=[2.9191701993300997e-06], optimizer.param_groups[0]['lr']=2.9191701993300997e-06, update=6081
+train_accuracy=0.658203125, scheduler.get_last_lr()=[2.917475422135668e-06], optimizer.param_groups[0]['lr']=2.917475422135668e-06, update=6145
+train_accuracy=0.64453125, scheduler.get_last_lr()=[2.915763563768359e-06], optimizer.param_groups[0]['lr']=2.915763563768359e-06, update=6209
+train_accuracy=0.66015625, scheduler.get_last_lr()=[2.914034644856782e-06], optimizer.param_groups[0]['lr']=2.914034644856782e-06, update=6273
+train_accuracy=0.62890625, scheduler.get_last_lr()=[2.9122886862351366e-06], optimizer.param_groups[0]['lr']=2.9122886862351366e-06, update=6337
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.910525708942955e-06], optimizer.param_groups[0]['lr']=2.910525708942955e-06, update=6401
+train_accuracy=0.669921875, scheduler.get_last_lr()=[2.908745734224852e-06], optimizer.param_groups[0]['lr']=2.908745734224852e-06, update=6465
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.906948783530269e-06], optimizer.param_groups[0]['lr']=2.906948783530269e-06, update=6529
+train_accuracy=0.66015625, scheduler.get_last_lr()=[2.9051348785132156e-06], optimizer.param_groups[0]['lr']=2.9051348785132156e-06, update=6593
+train_accuracy=0.634765625, scheduler.get_last_lr()=[2.903304041032007e-06], optimizer.param_groups[0]['lr']=2.903304041032007e-06, update=6657
+train_accuracy=0.654296875, scheduler.get_last_lr()=[2.901456293149002e-06], optimizer.param_groups[0]['lr']=2.901456293149002e-06, update=6721
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.8995916571303375e-06], optimizer.param_groups[0]['lr']=2.8995916571303375e-06, update=6785
+train_accuracy=0.685546875, scheduler.get_last_lr()=[2.897710155445658e-06], optimizer.param_groups[0]['lr']=2.897710155445658e-06, update=6849
+train_accuracy=0.677734375, scheduler.get_last_lr()=[2.895811810767848e-06], optimizer.param_groups[0]['lr']=2.895811810767848e-06, update=6913
+train_accuracy=0.66796875, scheduler.get_last_lr()=[2.8938966459727563e-06], optimizer.param_groups[0]['lr']=2.8938966459727563e-06, update=6977
+train_accuracy=0.677734375, scheduler.get_last_lr()=[2.8919646841389213e-06], optimizer.param_groups[0]['lr']=2.8919646841389213e-06, update=7041
+train_accuracy=0.66015625, scheduler.get_last_lr()=[2.8900159485472927e-06], optimizer.param_groups[0]['lr']=2.8900159485472927e-06, update=7105
+train_accuracy=0.63671875, scheduler.get_last_lr()=[2.888050462680951e-06], optimizer.param_groups[0]['lr']=2.888050462680951e-06, update=7169
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.886068250224825e-06], optimizer.param_groups[0]['lr']=2.886068250224825e-06, update=7233
+train_accuracy=0.69140625, scheduler.get_last_lr()=[2.8840693350654052e-06], optimizer.param_groups[0]['lr']=2.8840693350654052e-06, update=7297
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.882053741290457e-06], optimizer.param_groups[0]['lr']=2.882053741290457e-06, update=7361
+train_accuracy=0.658203125, scheduler.get_last_lr()=[2.88002149318873e-06], optimizer.param_groups[0]['lr']=2.88002149318873e-06, update=7425
+train_accuracy=0.609375, scheduler.get_last_lr()=[2.8779726152496656e-06], optimizer.param_groups[0]['lr']=2.8779726152496656e-06, update=7489
+train_accuracy=0.62890625, scheduler.get_last_lr()=[2.875907132163101e-06], optimizer.param_groups[0]['lr']=2.875907132163101e-06, update=7553
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.8738250688189748e-06], optimizer.param_groups[0]['lr']=2.8738250688189748e-06, update=7617
+train_accuracy=0.6953125, scheduler.get_last_lr()=[2.871726450307021e-06], optimizer.param_groups[0]['lr']=2.871726450307021e-06, update=7681
+train_accuracy=0.61328125, scheduler.get_last_lr()=[2.8696113019164725e-06], optimizer.param_groups[0]['lr']=2.8696113019164725e-06, update=7745
+train_accuracy=0.666015625, scheduler.get_last_lr()=[2.8674796491357547e-06], optimizer.param_groups[0]['lr']=2.8674796491357547e-06, update=7809
+train_accuracy=0.611328125, scheduler.get_last_lr()=[2.865331517652176e-06], optimizer.param_groups[0]['lr']=2.865331517652176e-06, update=7873
+train_accuracy=0.638671875, scheduler.get_last_lr()=[2.8631669333516218e-06], optimizer.param_groups[0]['lr']=2.8631669333516218e-06, update=7937
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.8609859223182398e-06], optimizer.param_groups[0]['lr']=2.8609859223182398e-06, update=8001
+train_accuracy=0.677734375, scheduler.get_last_lr()=[2.8587885108341264e-06], optimizer.param_groups[0]['lr']=2.8587885108341264e-06, update=8065
+train_accuracy=0.71484375, scheduler.get_last_lr()=[2.8565747253790117e-06], optimizer.param_groups[0]['lr']=2.8565747253790117e-06, update=8129
+train_accuracy=0.65625, scheduler.get_last_lr()=[2.8543445926299375e-06], optimizer.param_groups[0]['lr']=2.8543445926299375e-06, update=8193
+train_accuracy=0.62890625, scheduler.get_last_lr()=[2.8520981394609387e-06], optimizer.param_groups[0]['lr']=2.8520981394609387e-06, update=8257
+train_accuracy=0.634765625, scheduler.get_last_lr()=[2.849835392942717e-06], optimizer.param_groups[0]['lr']=2.849835392942717e-06, update=8321
+train_accuracy=0.650390625, scheduler.get_last_lr()=[2.8475563803423167e-06], optimizer.param_groups[0]['lr']=2.8475563803423167e-06, update=8385
+train_accuracy=0.685546875, scheduler.get_last_lr()=[2.845261129122794e-06], optimizer.param_groups[0]['lr']=2.845261129122794e-06, update=8449
+train_accuracy=0.587890625, scheduler.get_last_lr()=[2.8429496669428886e-06], optimizer.param_groups[0]['lr']=2.8429496669428886e-06, update=8513
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.8406220216566882e-06], optimizer.param_groups[0]['lr']=2.8406220216566882e-06, update=8577
+train_accuracy=0.66015625, scheduler.get_last_lr()=[2.838278221313294e-06], optimizer.param_groups[0]['lr']=2.838278221313294e-06, update=8641
+train_accuracy=0.640625, scheduler.get_last_lr()=[2.8359182941564825e-06], optimizer.param_groups[0]['lr']=2.8359182941564825e-06, update=8705
+train_accuracy=0.67578125, scheduler.get_last_lr()=[2.8335422686243646e-06], optimizer.param_groups[0]['lr']=2.8335422686243646e-06, update=8769
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.831150173349044e-06], optimizer.param_groups[0]['lr']=2.831150173349044e-06, update=8833
+train_accuracy=0.634765625, scheduler.get_last_lr()=[2.8287420371562717e-06], optimizer.param_groups[0]['lr']=2.8287420371562717e-06, update=8897
+train_accuracy=0.671875, scheduler.get_last_lr()=[2.826317889065097e-06], optimizer.param_groups[0]['lr']=2.826317889065097e-06, update=8961
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.823877758287521e-06], optimizer.param_groups[0]['lr']=2.823877758287521e-06, update=9025
+train_accuracy=0.689453125, scheduler.get_last_lr()=[2.8214216742281422e-06], optimizer.param_groups[0]['lr']=2.8214216742281422e-06, update=9089
+train_accuracy=0.638671875, scheduler.get_last_lr()=[2.818949666483803e-06], optimizer.param_groups[0]['lr']=2.818949666483803e-06, update=9153
+train_accuracy=0.67578125, scheduler.get_last_lr()=[2.8164617648432317e-06], optimizer.param_groups[0]['lr']=2.8164617648432317e-06, update=9217
+train_accuracy=0.654296875, scheduler.get_last_lr()=[2.813957999286687e-06], optimizer.param_groups[0]['lr']=2.813957999286687e-06, update=9281
+train_accuracy=0.697265625, scheduler.get_last_lr()=[2.8114383999855922e-06], optimizer.param_groups[0]['lr']=2.8114383999855922e-06, update=9345
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.8089029973021757e-06], optimizer.param_groups[0]['lr']=2.8089029973021757e-06, update=9409
+train_accuracy=0.66796875, scheduler.get_last_lr()=[2.806351821789101e-06], optimizer.param_groups[0]['lr']=2.806351821789101e-06, update=9473
+train_accuracy=0.6171875, scheduler.get_last_lr()=[2.8037849041891035e-06], optimizer.param_groups[0]['lr']=2.8037849041891035e-06, update=9537
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.8012022754346154e-06], optimizer.param_groups[0]['lr']=2.8012022754346154e-06, update=9601
+train_accuracy=0.666015625, scheduler.get_last_lr()=[2.7986039666473957e-06], optimizer.param_groups[0]['lr']=2.7986039666473957e-06, update=9665
+train_accuracy=0.716796875, scheduler.get_last_lr()=[2.795990009138154e-06], optimizer.param_groups[0]['lr']=2.795990009138154e-06, update=9729
+train_accuracy=0.66796875, scheduler.get_last_lr()=[2.7933604344061744e-06], optimizer.param_groups[0]['lr']=2.7933604344061744e-06, update=9793
+train_accuracy=0.650390625, scheduler.get_last_lr()=[2.7907152741389333e-06], optimizer.param_groups[0]['lr']=2.7907152741389333e-06, update=9857
+train_accuracy=0.642578125, scheduler.get_last_lr()=[2.788054560211722e-06], optimizer.param_groups[0]['lr']=2.788054560211722e-06, update=9921
+train_accuracy=0.640625, scheduler.get_last_lr()=[2.785378324687257e-06], optimizer.param_groups[0]['lr']=2.785378324687257e-06, update=9985
+train_accuracy=0.61328125, scheduler.get_last_lr()=[2.7826865998152983e-06], optimizer.param_groups[0]['lr']=2.7826865998152983e-06, update=10049
+train_accuracy=0.66015625, scheduler.get_last_lr()=[2.779979418032259e-06], optimizer.param_groups[0]['lr']=2.779979418032259e-06, update=10113
+train_accuracy=0.68359375, scheduler.get_last_lr()=[2.777256811960814e-06], optimizer.param_groups[0]['lr']=2.777256811960814e-06, update=10177
+train_accuracy=0.669921875, scheduler.get_last_lr()=[2.774518814409507e-06], optimizer.param_groups[0]['lr']=2.774518814409507e-06, update=10241
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.7717654583723563e-06], optimizer.param_groups[0]['lr']=2.7717654583723563e-06, update=10305
+train_accuracy=0.671875, scheduler.get_last_lr()=[2.7689967770284566e-06], optimizer.param_groups[0]['lr']=2.7689967770284566e-06, update=10369
+train_accuracy=0.66796875, scheduler.get_last_lr()=[2.7662128037415776e-06], optimizer.param_groups[0]['lr']=2.7662128037415776e-06, update=10433
+train_accuracy=0.64453125, scheduler.get_last_lr()=[2.7634135720597647e-06], optimizer.param_groups[0]['lr']=2.7634135720597647e-06, update=10497
+train_accuracy=0.673828125, scheduler.get_last_lr()=[2.760599115714932e-06], optimizer.param_groups[0]['lr']=2.760599115714932e-06, update=10561
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.7577694686224586e-06], optimizer.param_groups[0]['lr']=2.7577694686224586e-06, update=10625
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.7549246648807777e-06], optimizer.param_groups[0]['lr']=2.7549246648807777e-06, update=10689
+train_accuracy=0.673828125, scheduler.get_last_lr()=[2.752064738770966e-06], optimizer.param_groups[0]['lr']=2.752064738770966e-06, update=10753
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.749189724756333e-06], optimizer.param_groups[0]['lr']=2.749189724756333e-06, update=10817
+train_accuracy=0.6953125, scheduler.get_last_lr()=[2.7462996574820013e-06], optimizer.param_groups[0]['lr']=2.7462996574820013e-06, update=10881
+train_accuracy=0.6484375, scheduler.get_last_lr()=[2.7433945717744932e-06], optimizer.param_groups[0]['lr']=2.7433945717744932e-06, update=10945
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.740474502641309e-06], optimizer.param_groups[0]['lr']=2.740474502641309e-06, update=11009
+train_accuracy=0.681640625, scheduler.get_last_lr()=[2.737539485270505e-06], optimizer.param_groups[0]['lr']=2.737539485270505e-06, update=11073
+train_accuracy=0.681640625, scheduler.get_last_lr()=[2.734589555030271e-06], optimizer.param_groups[0]['lr']=2.734589555030271e-06, update=11137
+train_accuracy=0.666015625, scheduler.get_last_lr()=[2.7316247474685023e-06], optimizer.param_groups[0]['lr']=2.7316247474685023e-06, update=11201
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.7286450983123734e-06], optimizer.param_groups[0]['lr']=2.7286450983123734e-06, update=11265
+train_accuracy=0.69921875, scheduler.get_last_lr()=[2.725650643467904e-06], optimizer.param_groups[0]['lr']=2.725650643467904e-06, update=11329
+train_accuracy=0.69921875, scheduler.get_last_lr()=[2.7226414190195313e-06], optimizer.param_groups[0]['lr']=2.7226414190195313e-06, update=11393
+train_accuracy=0.69140625, scheduler.get_last_lr()=[2.71961746122967e-06], optimizer.param_groups[0]['lr']=2.71961746122967e-06, update=11457
+train_accuracy=0.693359375, scheduler.get_last_lr()=[2.7165788065382792e-06], optimizer.param_groups[0]['lr']=2.7165788065382792e-06, update=11521
+train_accuracy=0.662109375, scheduler.get_last_lr()=[2.713525491562421e-06], optimizer.param_groups[0]['lr']=2.713525491562421e-06, update=11585
+epoch: 1
+train_accuracy=0.673828125, scheduler.get_last_lr()=[2.7104575530958212e-06], optimizer.param_groups[0]['lr']=2.7104575530958212e-06, update=11649
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.7073750281084233e-06], optimizer.param_groups[0]['lr']=2.7073750281084233e-06, update=11713
+train_accuracy=0.671875, scheduler.get_last_lr()=[2.7042779537459456e-06], optimizer.param_groups[0]['lr']=2.7042779537459456e-06, update=11777
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.701166367329432e-06], optimizer.param_groups[0]['lr']=2.701166367329432e-06, update=11841
+train_accuracy=0.69140625, scheduler.get_last_lr()=[2.698040306354803e-06], optimizer.param_groups[0]['lr']=2.698040306354803e-06, update=11905
+train_accuracy=0.669921875, scheduler.get_last_lr()=[2.694899808492403e-06], optimizer.param_groups[0]['lr']=2.694899808492403e-06, update=11969
+train_accuracy=0.716796875, scheduler.get_last_lr()=[2.6917449115865483e-06], optimizer.param_groups[0]['lr']=2.6917449115865483e-06, update=12033
+train_accuracy=0.677734375, scheduler.get_last_lr()=[2.688575653655068e-06], optimizer.param_groups[0]['lr']=2.688575653655068e-06, update=12097
+train_accuracy=0.65234375, scheduler.get_last_lr()=[2.6853920728888478e-06], optimizer.param_groups[0]['lr']=2.6853920728888478e-06, update=12161
+train_accuracy=0.6640625, scheduler.get_last_lr()=[2.682194207651371e-06], optimizer.param_groups[0]['lr']=2.682194207651371e-06, update=12225
+train_accuracy=0.6640625, scheduler.get_last_lr()=[2.678982096478254e-06], optimizer.param_groups[0]['lr']=2.678982096478254e-06, update=12289
+train_accuracy=0.69140625, scheduler.get_last_lr()=[2.675755778076782e-06], optimizer.param_groups[0]['lr']=2.675755778076782e-06, update=12353
+train_accuracy=0.701171875, scheduler.get_last_lr()=[2.6725152913254444e-06], optimizer.param_groups[0]['lr']=2.6725152913254444e-06, update=12417
+train_accuracy=0.650390625, scheduler.get_last_lr()=[2.669260675273464e-06], optimizer.param_groups[0]['lr']=2.669260675273464e-06, update=12481
+train_accuracy=0.666015625, scheduler.get_last_lr()=[2.6659919691403288e-06], optimizer.param_groups[0]['lr']=2.6659919691403288e-06, update=12545
+train_accuracy=0.6953125, scheduler.get_last_lr()=[2.6627092123153172e-06], optimizer.param_groups[0]['lr']=2.6627092123153172e-06, update=12609
+train_accuracy=0.69140625, scheduler.get_last_lr()=[2.6594124443570245e-06], optimizer.param_groups[0]['lr']=2.6594124443570245e-06, update=12673
+train_accuracy=0.693359375, scheduler.get_last_lr()=[2.656101704992887e-06], optimizer.param_groups[0]['lr']=2.656101704992887e-06, update=12737
+train_accuracy=0.662109375, scheduler.get_last_lr()=[2.6527770341187004e-06], optimizer.param_groups[0]['lr']=2.6527770341187004e-06, update=12801
+train_accuracy=0.69921875, scheduler.get_last_lr()=[2.649438471798143e-06], optimizer.param_groups[0]['lr']=2.649438471798143e-06, update=12865
+train_accuracy=0.724609375, scheduler.get_last_lr()=[2.6460860582622893e-06], optimizer.param_groups[0]['lr']=2.6460860582622893e-06, update=12929
+train_accuracy=0.705078125, scheduler.get_last_lr()=[2.642719833909128e-06], optimizer.param_groups[0]['lr']=2.642719833909128e-06, update=12993
+train_accuracy=0.68359375, scheduler.get_last_lr()=[2.6393398393030723e-06], optimizer.param_groups[0]['lr']=2.6393398393030723e-06, update=13057
+train_accuracy=0.689453125, scheduler.get_last_lr()=[2.6359461151744745e-06], optimizer.param_groups[0]['lr']=2.6359461151744745e-06, update=13121
+train_accuracy=0.67578125, scheduler.get_last_lr()=[2.632538702419132e-06], optimizer.param_groups[0]['lr']=2.632538702419132e-06, update=13185
+train_accuracy=0.693359375, scheduler.get_last_lr()=[2.6291176420977978e-06], optimizer.param_groups[0]['lr']=2.6291176420977978e-06, update=13249
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.6256829754356806e-06], optimizer.param_groups[0]['lr']=2.6256829754356806e-06, update=13313
+train_accuracy=0.697265625, scheduler.get_last_lr()=[2.6222347438219544e-06], optimizer.param_groups[0]['lr']=2.6222347438219544e-06, update=13377
+train_accuracy=0.693359375, scheduler.get_last_lr()=[2.6187729888092554e-06], optimizer.param_groups[0]['lr']=2.6187729888092554e-06, update=13441
+train_accuracy=0.6953125, scheduler.get_last_lr()=[2.6152977521131806e-06], optimizer.param_groups[0]['lr']=2.6152977521131806e-06, update=13505
+train_accuracy=0.685546875, scheduler.get_last_lr()=[2.6118090756117904e-06], optimizer.param_groups[0]['lr']=2.6118090756117904e-06, update=13569
+train_accuracy=0.6875, scheduler.get_last_lr()=[2.608307001345098e-06], optimizer.param_groups[0]['lr']=2.608307001345098e-06, update=13633
+train_accuracy=0.705078125, scheduler.get_last_lr()=[2.6047915715145662e-06], optimizer.param_groups[0]['lr']=2.6047915715145662e-06, update=13697
+train_accuracy=0.70703125, scheduler.get_last_lr()=[2.6012628284825973e-06], optimizer.param_groups[0]['lr']=2.6012628284825973e-06, update=13761
+train_accuracy=0.671875, scheduler.get_last_lr()=[2.597720814772024e-06], optimizer.param_groups[0]['lr']=2.597720814772024e-06, update=13825
+train_accuracy=0.64453125, scheduler.get_last_lr()=[2.594165573065596e-06], optimizer.param_groups[0]['lr']=2.594165573065596e-06, update=13889
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.590597146205465e-06], optimizer.param_groups[0]['lr']=2.590597146205465e-06, update=13953
+train_accuracy=0.654296875, scheduler.get_last_lr()=[2.5870155771926712e-06], optimizer.param_groups[0]['lr']=2.5870155771926712e-06, update=14017
+train_accuracy=0.673828125, scheduler.get_last_lr()=[2.583420909186622e-06], optimizer.param_groups[0]['lr']=2.583420909186622e-06, update=14081
+train_accuracy=0.669921875, scheduler.get_last_lr()=[2.5798131855045726e-06], optimizer.param_groups[0]['lr']=2.5798131855045726e-06, update=14145
+train_accuracy=0.70703125, scheduler.get_last_lr()=[2.576192449621106e-06], optimizer.param_groups[0]['lr']=2.576192449621106e-06, update=14209
+train_accuracy=0.666015625, scheduler.get_last_lr()=[2.572558745167607e-06], optimizer.param_groups[0]['lr']=2.572558745167607e-06, update=14273
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.5689121159317363e-06], optimizer.param_groups[0]['lr']=2.5689121159317363e-06, update=14337
+train_accuracy=0.634765625, scheduler.get_last_lr()=[2.5652526058569057e-06], optimizer.param_groups[0]['lr']=2.5652526058569057e-06, update=14401
+train_accuracy=0.6875, scheduler.get_last_lr()=[2.561580259041744e-06], optimizer.param_groups[0]['lr']=2.561580259041744e-06, update=14465
+train_accuracy=0.69921875, scheduler.get_last_lr()=[2.55789511973957e-06], optimizer.param_groups[0]['lr']=2.55789511973957e-06, update=14529
+train_accuracy=0.70703125, scheduler.get_last_lr()=[2.5541972323578568e-06], optimizer.param_groups[0]['lr']=2.5541972323578568e-06, update=14593
+train_accuracy=0.677734375, scheduler.get_last_lr()=[2.5504866414576965e-06], optimizer.param_groups[0]['lr']=2.5504866414576965e-06, update=14657
+train_accuracy=0.689453125, scheduler.get_last_lr()=[2.5467633917532645e-06], optimizer.param_groups[0]['lr']=2.5467633917532645e-06, update=14721
+train_accuracy=0.662109375, scheduler.get_last_lr()=[2.5430275281112814e-06], optimizer.param_groups[0]['lr']=2.5430275281112814e-06, update=14785
+train_accuracy=0.720703125, scheduler.get_last_lr()=[2.539279095550468e-06], optimizer.param_groups[0]['lr']=2.539279095550468e-06, update=14849
+train_accuracy=0.703125, scheduler.get_last_lr()=[2.5355181392410084e-06], optimizer.param_groups[0]['lr']=2.5355181392410084e-06, update=14913
+train_accuracy=0.71875, scheduler.get_last_lr()=[2.5317447045040026e-06], optimizer.param_groups[0]['lr']=2.5317447045040026e-06, update=14977
+train_accuracy=0.708984375, scheduler.get_last_lr()=[2.52795883681092e-06], optimizer.param_groups[0]['lr']=2.52795883681092e-06, update=15041
+train_accuracy=0.697265625, scheduler.get_last_lr()=[2.5241605817830527e-06], optimizer.param_groups[0]['lr']=2.5241605817830527e-06, update=15105
+train_accuracy=0.677734375, scheduler.get_last_lr()=[2.5203499851909663e-06], optimizer.param_groups[0]['lr']=2.5203499851909663e-06, update=15169
+train_accuracy=0.681640625, scheduler.get_last_lr()=[2.5165270929539463e-06], optimizer.param_groups[0]['lr']=2.5165270929539463e-06, update=15233
+train_accuracy=0.705078125, scheduler.get_last_lr()=[2.512691951139446e-06], optimizer.param_groups[0]['lr']=2.512691951139446e-06, update=15297
+train_accuracy=0.701171875, scheduler.get_last_lr()=[2.508844605962532e-06], optimizer.param_groups[0]['lr']=2.508844605962532e-06, update=15361
+train_accuracy=0.708984375, scheduler.get_last_lr()=[2.5049851037853258e-06], optimizer.param_groups[0]['lr']=2.5049851037853258e-06, update=15425
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.5011134911164463e-06], optimizer.param_groups[0]['lr']=2.5011134911164463e-06, update=15489
+train_accuracy=0.689453125, scheduler.get_last_lr()=[2.4972298146104485e-06], optimizer.param_groups[0]['lr']=2.4972298146104485e-06, update=15553
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.4933341210672615e-06], optimizer.param_groups[0]['lr']=2.4933341210672615e-06, update=15617
+train_accuracy=0.712890625, scheduler.get_last_lr()=[2.489426457431626e-06], optimizer.param_groups[0]['lr']=2.489426457431626e-06, update=15681
+train_accuracy=0.703125, scheduler.get_last_lr()=[2.485506870792526e-06], optimizer.param_groups[0]['lr']=2.485506870792526e-06, update=15745
+train_accuracy=0.689453125, scheduler.get_last_lr()=[2.4815754083826224e-06], optimizer.param_groups[0]['lr']=2.4815754083826224e-06, update=15809
+train_accuracy=0.720703125, scheduler.get_last_lr()=[2.4776321175776864e-06], optimizer.param_groups[0]['lr']=2.4776321175776864e-06, update=15873
+train_accuracy=0.701171875, scheduler.get_last_lr()=[2.4736770458960234e-06], optimizer.param_groups[0]['lr']=2.4736770458960234e-06, update=15937
+train_accuracy=0.6953125, scheduler.get_last_lr()=[2.4697102409979057e-06], optimizer.param_groups[0]['lr']=2.4697102409979057e-06, update=16001
+train_accuracy=0.703125, scheduler.get_last_lr()=[2.4657317506849936e-06], optimizer.param_groups[0]['lr']=2.4657317506849936e-06, update=16065
+train_accuracy=0.689453125, scheduler.get_last_lr()=[2.4617416228997634e-06], optimizer.param_groups[0]['lr']=2.4617416228997634e-06, update=16129
+train_accuracy=0.712890625, scheduler.get_last_lr()=[2.4577399057249272e-06], optimizer.param_groups[0]['lr']=2.4577399057249272e-06, update=16193
+train_accuracy=0.70703125, scheduler.get_last_lr()=[2.4537266473828543e-06], optimizer.param_groups[0]['lr']=2.4537266473828543e-06, update=16257
+train_accuracy=0.712890625, scheduler.get_last_lr()=[2.4497018962349882e-06], optimizer.param_groups[0]['lr']=2.4497018962349882e-06, update=16321
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.4456657007812687e-06], optimizer.param_groups[0]['lr']=2.4456657007812687e-06, update=16385
+train_accuracy=0.68359375, scheduler.get_last_lr()=[2.4416181096595418e-06], optimizer.param_groups[0]['lr']=2.4416181096595418e-06, update=16449
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.4375591716449766e-06], optimizer.param_groups[0]['lr']=2.4375591716449766e-06, update=16513
+train_accuracy=0.6875, scheduler.get_last_lr()=[2.4334889356494768e-06], optimizer.param_groups[0]['lr']=2.4334889356494768e-06, update=16577
+train_accuracy=0.728515625, scheduler.get_last_lr()=[2.4294074507210932e-06], optimizer.param_groups[0]['lr']=2.4294074507210932e-06, update=16641
+train_accuracy=0.75390625, scheduler.get_last_lr()=[2.425314766043428e-06], optimizer.param_groups[0]['lr']=2.425314766043428e-06, update=16705
+train_accuracy=0.72265625, scheduler.get_last_lr()=[2.4212109309350484e-06], optimizer.param_groups[0]['lr']=2.4212109309350484e-06, update=16769
+train_accuracy=0.720703125, scheduler.get_last_lr()=[2.417095994848886e-06], optimizer.param_groups[0]['lr']=2.417095994848886e-06, update=16833
+train_accuracy=0.71484375, scheduler.get_last_lr()=[2.412970007371646e-06], optimizer.param_groups[0]['lr']=2.412970007371646e-06, update=16897
+train_accuracy=0.71484375, scheduler.get_last_lr()=[2.408833018223207e-06], optimizer.param_groups[0]['lr']=2.408833018223207e-06, update=16961
+train_accuracy=0.716796875, scheduler.get_last_lr()=[2.4046850772560204e-06], optimizer.param_groups[0]['lr']=2.4046850772560204e-06, update=17025
+train_accuracy=0.712890625, scheduler.get_last_lr()=[2.4005262344545143e-06], optimizer.param_groups[0]['lr']=2.4005262344545143e-06, update=17089
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.3963565399344874e-06], optimizer.param_groups[0]['lr']=2.3963565399344874e-06, update=17153
+train_accuracy=0.72265625, scheduler.get_last_lr()=[2.392176043942506e-06], optimizer.param_groups[0]['lr']=2.392176043942506e-06, update=17217
+train_accuracy=0.701171875, scheduler.get_last_lr()=[2.3879847968552985e-06], optimizer.param_groups[0]['lr']=2.3879847968552985e-06, update=17281
+train_accuracy=0.708984375, scheduler.get_last_lr()=[2.3837828491791486e-06], optimizer.param_groups[0]['lr']=2.3837828491791486e-06, update=17345
+train_accuracy=0.701171875, scheduler.get_last_lr()=[2.3795702515492876e-06], optimizer.param_groups[0]['lr']=2.3795702515492876e-06, update=17409
+train_accuracy=0.6796875, scheduler.get_last_lr()=[2.3753470547292816e-06], optimizer.param_groups[0]['lr']=2.3753470547292816e-06, update=17473
+train_accuracy=0.712890625, scheduler.get_last_lr()=[2.3711133096104227e-06], optimizer.param_groups[0]['lr']=2.3711133096104227e-06, update=17537
+train_accuracy=0.7109375, scheduler.get_last_lr()=[2.3668690672111135e-06], optimizer.param_groups[0]['lr']=2.3668690672111135e-06, update=17601
+train_accuracy=0.724609375, scheduler.get_last_lr()=[2.3626143786762536e-06], optimizer.param_groups[0]['lr']=2.3626143786762536e-06, update=17665
+train_accuracy=0.677734375, scheduler.get_last_lr()=[2.3583492952766233e-06], optimizer.param_groups[0]['lr']=2.3583492952766233e-06, update=17729
+train_accuracy=0.703125, scheduler.get_last_lr()=[2.354073868408265e-06], optimizer.param_groups[0]['lr']=2.354073868408265e-06, update=17793
+train_accuracy=0.751953125, scheduler.get_last_lr()=[2.349788149591863e-06], optimizer.param_groups[0]['lr']=2.349788149591863e-06, update=17857
+train_accuracy=0.708984375, scheduler.get_last_lr()=[2.345492190472127e-06], optimizer.param_groups[0]['lr']=2.345492190472127e-06, update=17921
+train_accuracy=0.708984375, scheduler.get_last_lr()=[2.3411860428171633e-06], optimizer.param_groups[0]['lr']=2.3411860428171633e-06, update=17985
+train_accuracy=0.720703125, scheduler.get_last_lr()=[2.3368697585178563e-06], optimizer.param_groups[0]['lr']=2.3368697585178563e-06, update=18049
+train_accuracy=0.734375, scheduler.get_last_lr()=[2.3325433895872406e-06], optimizer.param_groups[0]['lr']=2.3325433895872406e-06, update=18113
+train_accuracy=0.72265625, scheduler.get_last_lr()=[2.3282069881598757e-06], optimizer.param_groups[0]['lr']=2.3282069881598757e-06, update=18177
+train_accuracy=0.701171875, scheduler.get_last_lr()=[2.323860606491215e-06], optimizer.param_groups[0]['lr']=2.323860606491215e-06, update=18241
+train_accuracy=0.71875, scheduler.get_last_lr()=[2.31950429695698e-06], optimizer.param_groups[0]['lr']=2.31950429695698e-06, update=18305

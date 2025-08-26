@@ -72,13 +72,13 @@ class Args:
     # various batch sizes
     world_size: Optional[int] = None
     """The number of processes (GPUs) to use"""
-    num_train_epochs: int = 1
+    num_train_epochs: int = 5
     """Number of epochs to train"""
     num_updates: Optional[int] = None
     """The number of updates to train"""
-    gradient_accumulation_steps: int = 16
+    gradient_accumulation_steps: int = 128#16
     """The number of gradient accumulation steps"""
-    local_micro_batch_size: Optional[int] = 1
+    local_micro_batch_size: Optional[int] = 4#1
     """The micro batch size per GPU (HF's `per_device_train_batch_size`)"""
     total_episodes: Optional[int] = None
     """The total number of episodes in the dataset"""
@@ -387,6 +387,7 @@ if __name__ == "__main__":
             # reference_responses = data["reference_response_token"].to(device, non_blocking=True)
             # queries = data["query_token"].to(device, non_blocking=True)
             query_responses = data["query_reference_response_token"]
+            
             with accelerator.accumulate(model):
                 output = forward(model, query_responses, tokenizer)
                 # mask out gradient effects on response padding tokens

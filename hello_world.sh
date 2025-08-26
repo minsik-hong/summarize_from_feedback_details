@@ -15,12 +15,14 @@ POLICY_MODEL_PATH=models/$MODEL/policy_model_$SEED
 # 로그 이름 자동 설정
 NOW=$(date +"%Y%m%d_%H%M%S")
 MODEL_NAME_SAFE=${MODEL//\//_}
-LOGFILE="logs/reward_basic_${MODEL_NAME_SAFE}_seed${SEED}_${NOW}.txt"
+LOGFILE_SFT="logs/sft_${MODEL_NAME_SAFE}_seed${SEED}_${NOW}.txt"
+LOGFILE_RM="logs/reward_basic_${MODEL_NAME_SAFE}_seed${SEED}_${NOW}.txt"
+LOGFILE_PPO="logs/ppo_basic_${MODEL_NAME_SAFE}_seed${SEED}_${NOW}.txt"
 
 # vary the following parameters to fit your GPU memory
 local_rollout_forward_batch_size=2 # smaller fits better on GPU
 gradient_accumulation_steps=64 # bigger fits better on GPU, 기존 64로 설정되어 있음
-local_micro_batch_size=8 # smaller fits better on GPU
+local_micro_batch_size=1 # smaller fits better on GPU
 local_eval_batch_size=1 # smaller fits better on GPU
 
 # 1. you want to make sure gradient_accumulation_steps * local_micro_batch_size = 64
@@ -28,45 +30,45 @@ local_eval_batch_size=1 # smaller fits better on GPU
 # 2. if you are running on a single GPU, you want to make sure 
 # gradient_accumulation_steps * local_micro_batch_size = 512 to have the same hyperparameters
 
-# CUDA_VISIBLE_DEVICES=0 poetry run accelerate launch --config_file deepspeed.yaml \
-#     --main_process_port=29510 \
-#     summarize_from_feedback_details/sft.py \
-#     --base_model=$MODEL \
-#     --lr=$LR \
-#     --deepspeed \
-#     --track \
-#     --output_dir=$SFT_MODEL_PATH \
-#     --no-push-to-hub \
-#     --run_eval \
-#     --seed=$SEED
+#CUDA_VISIBLE_DEVICES=1 poetry run accelerate launch --config_file deepspeed.yaml \
+#    --main_process_port=29514 \
+#    summarize_from_feedback_details/sft.py \
+#    --base_model=$MODEL \
+#    --lr=$LR \
+#    --deepspeed \
+#    --track \
+#    --output_dir=$SFT_MODEL_PATH \
+#    --no-push-to-hub \
+#    --run_eval \
+#   --seed=$SEED 2>&1 | tee "$LOGFILE_SFT"
+#
+ CUDA_VISIBLE_DEVICES=0 poetry run accelerate launch --config_file deepspeed.yaml \
+     --main_process_port=29515 \
+     summarize_from_feedback_details/reward_basic.py \
+     --base_model=$MODEL \
+     --sft_model_path=$SFT_MODEL_PATH \
+     --lr=$LR \
+     --deepspeed \
+     --run_eval \
+     --track \
+     --output_dir=$REWARD_MODEL_PATH \
+     --no-push-to-hub \
+     --local_eval_batch_size=$local_eval_batch_size \
+     --seed=$SEED 2>&1 | tee "$LOGFILE_RM"
 
-CUDA_VISIBLE_DEVICES=0 poetry run accelerate launch --config_file deepspeed.yaml \
-    --main_process_port=29511 \
-    summarize_from_feedback_details/reward_basic.py \
-    --base_model=$MODEL \
-    --sft_model_path=$SFT_MODEL_PATH \
-    --lr=$LR \
-    --deepspeed \
-    --run_eval \
-    --track \
-    --output_dir=$REWARD_MODEL_PATH \
-    --no-push-to-hub \
-    --local_eval_batch_size=$local_eval_batch_size \
-    --seed=$SEED 2>&1 | tee "$LOGFILE"
-
-# CUDA_VISIBLE_DEVICES=0 poetry run accelerate launch --config_file deepspeed.yaml \
-#     --main_process_port=29510 \
-#     summarize_from_feedback_details/ppo.py \
-#     --local_rollout_forward_batch_size=$local_rollout_forward_batch_size \
-#     --gradient_accumulation_steps=$gradient_accumulation_steps \
-#     --local_micro_batch_size=$local_micro_batch_size \
-#     --base_model=$MODEL \
-#     --sft_model_path=$SFT_MODEL_PATH \
-#     --reward_model_path=$REWARD_MODEL_PATH \
-#     --lr=$LR \
-#     --deepspeed \
-#     --run_eval \
-#     --track \
-#     --output_dir=$POLICY_MODEL_PATH \
-#     --no-push-to-hub \
-#     --seed=$SEED
+# CUDA_VISIBLE_DEVICES=2 poetry run accelerate launch --config_file deepspeed.yaml \
+#    --main_process_port=29513 \
+#    summarize_from_feedback_details/ppo_basic.py \
+#    --local_rollout_forward_batch_size=$local_rollout_forward_batch_size \
+#    --gradient_accumulation_steps=$gradient_accumulation_steps \
+#    --local_micro_batch_size=$local_micro_batch_size \
+#    --base_model=$MODEL \
+#    --sft_model_path=$SFT_MODEL_PATH \
+#    --reward_model_path=$REWARD_MODEL_PATH \
+#    --lr=$LR \
+#    --deepspeed \
+#    --run_eval \
+#    --track \
+#    --output_dir=$POLICY_MODEL_PATH \
+#    --no-push-to-hub \
+#    --seed=$SEED 2>&1 | tee "$LOGFILE_PPO"

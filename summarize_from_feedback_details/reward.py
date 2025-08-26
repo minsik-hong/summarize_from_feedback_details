@@ -243,6 +243,7 @@ def evaluate(args: Args, accelerator, tokenizer, model, dataloader):
             query_responses = torch.cat((data["query_chosen_token"], data["query_rejected_token"]), dim=0)
             with accelerator.accumulate(model):
                 predicted_reward = get_reward(model, query_responses, tokenizer)
+                
                 chosen_rewards = predicted_reward[:data['query_chosen_token'].shape[0]]
                 rejected_rewards = predicted_reward[data['query_chosen_token'].shape[0]:]
                 accuracy = (chosen_rewards > rejected_rewards).float()

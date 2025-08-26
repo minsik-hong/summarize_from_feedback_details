@@ -71,13 +71,13 @@ class Args:
     # various batch sizes
     world_size: Optional[int] = None
     """The number of processes (GPUs) to use"""
-    num_train_epochs: int = 1
+    num_train_epochs: int = 5
     """Number of epochs to train"""
     num_updates: Optional[int] = None
     """The number of updates to train"""
-    gradient_accumulation_steps: int = 8
+    gradient_accumulation_steps: int = 64 #8
     """The number of gradient accumulation steps"""
-    local_micro_batch_size: Optional[int] = 1
+    local_micro_batch_size: Optional[int] = 4 #1
     """The micro batch size per GPU (HF's `per_device_train_batch_size`)"""
     total_episodes: Optional[int] = 92832
     """The total number of episodes in the dataset"""
@@ -298,12 +298,30 @@ def evaluate(args: Args, accelerator, tokenizer, model, dataloader):
 
             save_dir = f"eval_tables/{args.run_name}/scalar_logs"
             os.makedirs(save_dir, exist_ok=True)
-
+            
+            # 이렇게 돌렸는데 오류 발생함
+            #Traceback (most recent call last):
+            #   File "/home/hail/Distribution_RLHF/summarize_from_feedback_details/summarize_from_feedback_details/reward_basic.py", line 479, in <module>
+            #     evaluate_df = evaluate(args, accelerator, tokenizer, model, eval_dataloaders[eval_split])
+            #   File "/home/hail/Distribution_RLHF/summarize_from_feedback_details/summarize_from_feedback_details/reward_basic.py", line 302, in evaluate
+            #     pd.DataFrame(preferred_full, columns=[f"q{i}" for i in range(preferred_full.shape[1])]) \
+            # IndexError: tuple index out of range
+            # pd.DataFrame(preferred_full, columns=[f"q{i}" for i in range(preferred_full.shape[1])]) \
+            #     .to_csv(f"{save_dir}/preferred_rewards_scalar_step_{eval_split}_test.csv", index=False)
+            # pd.DataFrame(rejected_full, columns=[f"q{i}" for i in range(rejected_full.shape[1])]) \
+            #     .to_csv(f"{save_dir}/rejected_rewards_scalar_step_{eval_split}_test.csv", index=False)
+                
+            # 수정 
+            # preferred_full이 1차원이면 reshape
+            if preferred_full.ndim == 1:
+                preferred_full = preferred_full.reshape(-1, 1)
+            if rejected_full.ndim == 1:
+                rejected_full = rejected_full.reshape(-1, 1)
+                
             pd.DataFrame(preferred_full, columns=[f"q{i}" for i in range(preferred_full.shape[1])]) \
                 .to_csv(f"{save_dir}/preferred_rewards_scalar_step_{eval_split}_test.csv", index=False)
             pd.DataFrame(rejected_full, columns=[f"q{i}" for i in range(rejected_full.shape[1])]) \
                 .to_csv(f"{save_dir}/rejected_rewards_scalar_step_{eval_split}_test.csv", index=False)
-                    
             # ===== [추가 끝] =====
             
     model.train()

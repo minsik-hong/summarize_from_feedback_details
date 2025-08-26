@@ -1,0 +1,277 @@
+[2025-07-31 15:31:26,785] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-07-31 15:31:27,171] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-07-31 15:31:27,171] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/imminsik___parquet/imminsik--summarize_from_feedback_tldr_3_filtered_oai_preprocessing_gpt2_1753693335-ea151f27e7e33169/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/imminsik___parquet/imminsik--summarize_from_feedback_tldr_3_filtered_oai_preprocessing_gpt2_1753693335-ea151f27e7e33169/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+Found cached dataset parquet (/home/hail/.cache/huggingface/datasets/imminsik___parquet/imminsik--summarize_from_feedback_tldr_3_filtered_oai_preprocessing_gpt2_1753693335-ea151f27e7e33169/0.0.0/2a3b91fbd88a2c90d1dbbb32b460cf621d31bd5b05b934492fdef7d8d6f236ec)
+wandb: Currently logged in as: hmin7781 (hails). Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.21.0 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.4
+wandb: Run data is saved locally in /home/hail/Distribution_RLHF/summarize_from_feedback_details/wandb/run-20250731_153136-8xny3eps
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run sft_gpt2_newData__1__1753943487
+wandb: ⭐️ View project at https://wandb.ai/hails/tldr_summarize
+wandb: 🚀 View run at https://wandb.ai/hails/tldr_summarize/runs/8xny3eps
+Args(
+│   exp_name='sft_gpt2_newData',
+│   seed=1,
+│   cuda=True,
+│   run_name='sft_gpt2_newData__1__1753943487',
+│   load_from_cache_file=False,
+│   deepspeed=True,
+│   print_sample_output_freq=220,
+│   run_eval=True,
+│   eps=1e-05,
+│   lr=3e-06,
+│   optimizer='adamw',
+│   scheduler='cosine',
+│   warm_up_steps=0,
+│   world_size=1,
+│   num_train_epochs=5,
+│   num_updates=227,
+│   gradient_accumulation_steps=128,
+│   local_micro_batch_size=4,
+│   total_episodes=116722,
+│   micro_batch_size=4,
+│   local_batch_size=512,
+│   batch_size=512,
+│   local_eval_batch_size=4,
+│   base_model='openai-community/gpt2-large',
+│   query_dataset='imminsik/summarize_from_feedback_tldr_3_filtered_oai_preprocessing_gpt2_1753693335',
+│   response_length=53,
+│   truncate_token='eos',
+│   truncate_token_id=50256,
+│   temperature=0.01,
+│   track=True,
+│   wandb_project_name='tldr_summarize',
+│   wandb_entity=None,
+│   push_to_hub=False,
+│   hf_entity=None,
+│   hf_repo_id=None,
+│   hf_repo_revision=None,
+│   hf_repo_url=None,
+│   output_dir='models/openai-community/gpt2-large/sft_model_gpt2_1'
+)
+model.safetensors:   0%|          | 0.00/3.25G [00:00<?, ?B/s]model.safetensors:   0%|          | 10.5M/3.25G [00:00<01:50, 29.2MB/s]model.safetensors:   1%|          | 21.0M/3.25G [00:00<01:07, 47.9MB/s]model.safetensors:   1%|          | 31.5M/3.25G [00:00<00:55, 58.3MB/s]model.safetensors:   1%|▏         | 41.9M/3.25G [00:00<00:51, 62.6MB/s]model.safetensors:   2%|▏         | 52.4M/3.25G [00:00<00:46, 69.0MB/s]model.safetensors:   2%|▏         | 62.9M/3.25G [00:01<00:44, 71.7MB/s]model.safetensors:   2%|▏         | 73.4M/3.25G [00:01<00:44, 70.7MB/s]model.safetensors:   3%|▎         | 83.9M/3.25G [00:01<00:42, 74.9MB/s]model.safetensors:   3%|▎         | 94.4M/3.25G [00:01<00:41, 76.4MB/s]model.safetensors:   3%|▎         | 105M/3.25G [00:01<00:42, 74.4MB/s] model.safetensors:   4%|▎         | 115M/3.25G [00:01<00:40, 77.4MB/s]model.safetensors:   4%|▍         | 126M/3.25G [00:01<00:40, 77.4MB/s]model.safetensors:   4%|▍         | 136M/3.25G [00:01<00:41, 75.0MB/s]model.safetensors:   5%|▍         | 147M/3.25G [00:02<00:39, 77.9MB/s]model.safetensors:   5%|▍         | 157M/3.25G [00:02<00:39, 77.3MB/s]model.safetensors:   5%|▌         | 168M/3.25G [00:02<00:40, 75.4MB/s]model.safetensors:   5%|▌         | 178M/3.25G [00:02<00:39, 78.4MB/s]model.safetensors:   6%|▌         | 189M/3.25G [00:02<00:38, 79.0MB/s]model.safetensors:   6%|▌         | 199M/3.25G [00:02<00:39, 77.0MB/s]model.safetensors:   6%|▋         | 210M/3.25G [00:02<00:38, 79.3MB/s]model.safetensors:   7%|▋         | 220M/3.25G [00:03<00:38, 78.6MB/s]model.safetensors:   7%|▋         | 231M/3.25G [00:03<00:39, 76.4MB/s]model.safetensors:   7%|▋         | 241M/3.25G [00:03<00:38, 78.9MB/s]model.safetensors:   8%|▊         | 252M/3.25G [00:03<00:38, 78.1MB/s]model.safetensors:   8%|▊         | 262M/3.25G [00:03<00:38, 76.7MB/s]model.safetensors:   8%|▊         | 273M/3.25G [00:03<00:37, 79.4MB/s]model.safetensors:   9%|▊         | 283M/3.25G [00:03<00:37, 79.8MB/s]model.safetensors:   9%|▉         | 294M/3.25G [00:03<00:38, 77.4MB/s]model.safetensors:   9%|▉         | 304M/3.25G [00:04<00:36, 80.2MB/s]model.safetensors:  10%|▉         | 315M/3.25G [00:04<00:36, 80.6MB/s]model.safetensors:  10%|█         | 325M/3.25G [00:04<00:37, 77.4MB/s]model.safetensors:  10%|█         | 336M/3.25G [00:04<00:36, 79.8MB/s]model.safetensors:  11%|█         | 346M/3.25G [00:04<00:36, 80.2MB/s]model.safetensors:  11%|█         | 357M/3.25G [00:04<00:36, 78.7MB/s]model.safetensors:  11%|█▏        | 367M/3.25G [00:04<00:35, 81.4MB/s]model.safetensors:  12%|█▏        | 377M/3.25G [00:05<00:35, 80.1MB/s]model.safetensors:  12%|█▏        | 388M/3.25G [00:05<00:37, 76.3MB/s]model.safetensors:  12%|█▏        | 398M/3.25G [00:05<00:35, 79.4MB/s]model.safetensors:  13%|█▎        | 409M/3.25G [00:05<00:35, 80.1MB/s]model.safetensors:  13%|█▎        | 419M/3.25G [00:05<00:36, 77.7MB/s]model.safetensors:  13%|█▎        | 430M/3.25G [00:05<00:35, 79.7MB/s]model.safetensors:  14%|█▎        | 440M/3.25G [00:05<00:35, 79.0MB/s]model.safetensors:  14%|█▍        | 451M/3.25G [00:05<00:36, 75.7MB/s]model.safetensors:  14%|█▍        | 461M/3.25G [00:06<00:35, 78.4MB/s]model.safetensors:  15%|█▍        | 472M/3.25G [00:06<00:35, 77.8MB/s]model.safetensors:  15%|█▍        | 482M/3.25G [00:06<00:36, 76.1MB/s]model.safetensors:  15%|█▌        | 493M/3.25G [00:06<00:34, 79.1MB/s]model.safetensors:  16%|█▌        | 503M/3.25G [00:06<00:34, 79.2MB/s]model.safetensors:  16%|█▌        | 514M/3.25G [00:06<00:35, 76.1MB/s]model.safetensors:  16%|█▌        | 524M/3.25G [00:06<00:34, 78.8MB/s]model.safetensors:  16%|█▋        | 535M/3.25G [00:07<00:34, 78.8MB/s]model.safetensors:  17%|█▋        | 545M/3.25G [00:07<00:35, 75.8MB/s]model.safetensors:  17%|█▋        | 556M/3.25G [00:07<00:34, 78.5MB/s]model.safetensors:  17%|█▋        | 566M/3.25G [00:07<00:34, 78.2MB/s]model.safetensors:  18%|█▊        | 577M/3.25G [00:07<00:35, 75.1MB/s]model.safetensors:  18%|█▊        | 587M/3.25G [00:07<00:34, 77.9MB/s]model.safetensors:  18%|█▊        | 598M/3.25G [00:07<00:34, 77.4MB/s]model.safetensors:  19%|█▊        | 608M/3.25G [00:08<00:35, 74.8MB/s]model.safetensors:  19%|█▉        | 619M/3.25G [00:08<00:34, 77.2MB/s]model.safetensors:  19%|█▉        | 629M/3.25G [00:08<00:34, 76.7MB/s]model.safetensors:  20%|█▉        | 640M/3.25G [00:08<00:35, 74.2MB/s]model.safetensors:  20%|██        | 650M/3.25G [00:08<00:33, 77.1MB/s]model.safetensors:  20%|██        | 661M/3.25G [00:08<00:33, 77.7MB/s]model.safetensors:  21%|██        | 671M/3.25G [00:08<00:34, 74.3MB/s]model.safetensors:  21%|██        | 682M/3.25G [00:08<00:33, 77.5MB/s]model.safetensors:  21%|██▏       | 692M/3.25G [00:09<00:32, 78.1MB/s]model.safetensors:  22%|██▏       | 703M/3.25G [00:09<00:33, 76.3MB/s]model.safetensors:  22%|██▏       | 713M/3.25G [00:09<00:31, 79.8MB/s]model.safetensors:  22%|██▏       | 724M/3.25G [00:09<00:31, 80.4MB/s]model.safetensors:  23%|██▎       | 734M/3.25G [00:09<00:32, 77.5MB/s]model.safetensors:  23%|██▎       | 744M/3.25G [00:09<00:31, 80.2MB/s]model.safetensors:  23%|██▎       | 755M/3.25G [00:09<00:30, 80.5MB/s]model.safetensors:  24%|██▎       | 765M/3.25G [00:10<00:31, 77.9MB/s]model.safetensors:  24%|██▍       | 776M/3.25G [00:10<00:30, 80.5MB/s]model.safetensors:  24%|██▍       | 786M/3.25G [00:10<00:48, 50.8MB/s]model.safetensors:  25%|██▍       | 797M/3.25G [00:10<00:44, 55.2MB/s]model.safetensors:  25%|██▍       | 807M/3.25G [00:10<00:39, 61.7MB/s]model.safetensors:  25%|██▌       | 818M/3.25G [00:10<00:36, 65.8MB/s]model.safetensors:  26%|██▌       | 828M/3.25G [00:11<00:36, 67.1MB/s]model.safetensors:  26%|██▌       | 839M/3.25G [00:11<00:33, 71.8MB/s]model.safetensors:  26%|██▌       | 849M/3.25G [00:11<00:32, 73.6MB/s]model.safetensors:  26%|██▋       | 860M/3.25G [00:11<00:33, 72.3MB/s]model.safetensors:  27%|██▋       | 870M/3.25G [00:11<00:31, 75.9MB/s]model.safetensors:  27%|██▋       | 881M/3.25G [00:11<00:30, 76.3MB/s]model.safetensors:  27%|██▋       | 891M/3.25G [00:11<00:31, 74.2MB/s]model.safetensors:  28%|██▊       | 902M/3.25G [00:12<00:30, 76.6MB/s]model.safetensors:  28%|██▊       | 912M/3.25G [00:12<00:30, 76.1MB/s]model.safetensors:  28%|██▊       | 923M/3.25G [00:12<00:31, 74.0MB/s]model.safetensors:  29%|██▊       | 933M/3.25G [00:12<00:29, 77.3MB/s]model.safetensors:  29%|██▉       | 944M/3.25G [00:12<00:29, 77.3MB/s]model.safetensors:  29%|██▉       | 954M/3.25G [00:12<00:30, 74.8MB/s]model.safetensors:  30%|██▉       | 965M/3.25G [00:12<00:29, 77.5MB/s]model.safetensors:  30%|███       | 975M/3.25G [00:13<00:29, 77.3MB/s]model.safetensors:  30%|███       | 986M/3.25G [00:13<00:29, 75.5MB/s]model.safetensors:  31%|███       | 996M/3.25G [00:13<00:28, 78.3MB/s]model.safetensors:  31%|███       | 1.01G/3.25G [00:13<00:28, 77.8MB/s]model.safetensors:  31%|███▏      | 1.02G/3.25G [00:13<00:29, 75.2MB/s]model.safetensors:  32%|███▏      | 1.03G/3.25G [00:13<00:28, 78.0MB/s]model.safetensors:  32%|███▏      | 1.04G/3.25G [00:13<00:28, 78.0MB/s]model.safetensors:  32%|███▏      | 1.05G/3.25G [00:13<00:29, 74.9MB/s]model.safetensors:  33%|███▎      | 1.06G/3.25G [00:14<00:28, 77.8MB/s]model.safetensors:  33%|███▎      | 1.07G/3.25G [00:14<00:28, 77.3MB/s]model.safetensors:  33%|███▎      | 1.08G/3.25G [00:14<00:28, 74.9MB/s]model.safetensors:  34%|███▎      | 1.09G/3.25G [00:14<00:27, 77.8MB/s]model.safetensors:  34%|███▍      | 1.10G/3.25G [00:14<00:27, 78.7MB/s]model.safetensors:  34%|███▍      | 1.11G/3.25G [00:14<00:27, 77.4MB/s]model.safetensors:  35%|███▍      | 1.12G/3.25G [00:14<00:26, 80.1MB/s]model.safetensors:  35%|███▍      | 1.13G/3.25G [00:15<00:25, 83.5MB/s]model.safetensors:  35%|███▌      | 1.14G/3.25G [00:15<00:24, 86.0MB/s]model.safetensors:  36%|███▌      | 1.15G/3.25G [00:15<00:23, 88.0MB/s]model.safetensors:  36%|███▌      | 1.16G/3.25G [00:15<00:23, 89.5MB/s]model.safetensors:  36%|███▌      | 1.17G/3.25G [00:15<00:22, 90.4MB/s]model.safetensors:  36%|███▋      | 1.18G/3.25G [00:15<00:22, 91.0MB/s]model.safetensors:  37%|███▋      | 1.20G/3.25G [00:15<00:22, 91.5MB/s]model.safetensors:  37%|███▋      | 1.21G/3.25G [00:15<00:22, 92.0MB/s]model.safetensors:  37%|███▋      | 1.22G/3.25G [00:15<00:22, 92.2MB/s]model.safetensors:  38%|███▊      | 1.23G/3.25G [00:16<00:21, 92.3MB/s]model.safetensors:  38%|███▊      | 1.24G/3.25G [00:16<00:21, 92.5MB/s]model.safetensors:  38%|███▊      | 1.25G/3.25G [00:16<00:21, 92.4MB/s]model.safetensors:  39%|███▉      | 1.26G/3.25G [00:16<00:21, 92.6MB/s]model.safetensors:  39%|███▉      | 1.27G/3.25G [00:16<00:21, 92.6MB/s]model.safetensors:  39%|███▉      | 1.28G/3.25G [00:16<00:21, 92.8MB/s]model.safetensors:  40%|███▉      | 1.29G/3.25G [00:16<00:21, 93.0MB/s]model.safetensors:  40%|████      | 1.30G/3.25G [00:16<00:20, 92.9MB/s]model.safetensors:  40%|████      | 1.31G/3.25G [00:16<00:20, 92.6MB/s]model.safetensors:  41%|████      | 1.32G/3.25G [00:17<00:21, 90.7MB/s]model.safetensors:  41%|████      | 1.33G/3.25G [00:17<00:21, 90.9MB/s]model.safetensors:  41%|████▏     | 1.34G/3.25G [00:17<00:20, 91.5MB/s]model.safetensors:  42%|████▏     | 1.35G/3.25G [00:17<00:20, 91.7MB/s]model.safetensors:  42%|████▏     | 1.36G/3.25G [00:17<00:20, 92.1MB/s]model.safetensors:  42%|████▏     | 1.37G/3.25G [00:17<00:20, 92.4MB/s]model.safetensors:  43%|████▎     | 1.38G/3.25G [00:17<00:20, 92.6MB/s]model.safetensors:  43%|████▎     | 1.39G/3.25G [00:17<00:20, 92.5MB/s]model.safetensors:  43%|████▎     | 1.41G/3.25G [00:17<00:19, 92.6MB/s]model.safetensors:  44%|████▎     | 1.42G/3.25G [00:18<00:19, 92.8MB/s]model.safetensors:  44%|████▍     | 1.43G/3.25G [00:18<00:19, 92.6MB/s]model.safetensors:  44%|████▍     | 1.44G/3.25G [00:18<00:19, 92.7MB/s]model.safetensors:  45%|████▍     | 1.45G/3.25G [00:18<00:19, 92.7MB/s]model.safetensors:  45%|████▍     | 1.46G/3.25G [00:18<00:19, 92.6MB/s]model.safetensors:  45%|████▌     | 1.47G/3.25G [00:18<00:19, 92.8MB/s]model.safetensors:  46%|████▌     | 1.48G/3.25G [00:18<00:19, 92.6MB/s]model.safetensors:  46%|████▌     | 1.49G/3.25G [00:18<00:18, 92.8MB/s]model.safetensors:  46%|████▌     | 1.50G/3.25G [00:18<00:18, 92.8MB/s]model.safetensors:  47%|████▋     | 1.51G/3.25G [00:19<00:18, 92.2MB/s]model.safetensors:  47%|████▋     | 1.52G/3.25G [00:19<00:18, 91.8MB/s]model.safetensors:  47%|████▋     | 1.53G/3.25G [00:19<00:18, 91.5MB/s]model.safetensors:  47%|████▋     | 1.54G/3.25G [00:19<00:18, 91.4MB/s]model.safetensors:  48%|████▊     | 1.55G/3.25G [00:19<00:18, 91.8MB/s]model.safetensors:  48%|████▊     | 1.56G/3.25G [00:19<00:18, 91.4MB/s]model.safetensors:  48%|████▊     | 1.57G/3.25G [00:19<00:18, 91.2MB/s]model.safetensors:  49%|████▉     | 1.58G/3.25G [00:19<00:18, 91.0MB/s]model.safetensors:  49%|████▉     | 1.59G/3.25G [00:20<00:18, 90.9MB/s]model.safetensors:  49%|████▉     | 1.60G/3.25G [00:20<00:18, 90.9MB/s]model.safetensors:  50%|████▉     | 1.61G/3.25G [00:20<00:18, 90.0MB/s]model.safetensors:  50%|█████     | 1.63G/3.25G [00:20<00:17, 90.2MB/s]model.safetensors:  50%|█████     | 1.64G/3.25G [00:20<00:17, 90.2MB/s]model.safetensors:  51%|█████     | 1.65G/3.25G [00:20<00:17, 90.4MB/s]model.safetensors:  51%|█████     | 1.66G/3.25G [00:20<00:17, 90.4MB/s]model.safetensors:  51%|█████▏    | 1.67G/3.25G [00:20<00:17, 90.2MB/s]model.safetensors:  52%|█████▏    | 1.68G/3.25G [00:20<00:17, 90.3MB/s]model.safetensors:  52%|█████▏    | 1.69G/3.25G [00:21<00:17, 90.6MB/s]model.safetensors:  52%|█████▏    | 1.70G/3.25G [00:21<00:17, 90.7MB/s]model.safetensors:  53%|█████▎    | 1.71G/3.25G [00:21<00:16, 90.9MB/s]model.safetensors:  53%|█████▎    | 1.72G/3.25G [00:21<00:16, 90.9MB/s]model.safetensors:  53%|█████▎    | 1.73G/3.25G [00:21<00:16, 90.9MB/s]model.safetensors:  54%|█████▎    | 1.74G/3.25G [00:21<00:16, 91.4MB/s]model.safetensors:  54%|█████▍    | 1.75G/3.25G [00:21<00:16, 91.8MB/s]model.safetensors:  54%|█████▍    | 1.76G/3.25G [00:21<00:16, 91.9MB/s]model.safetensors:  55%|█████▍    | 1.77G/3.25G [00:21<00:16, 91.6MB/s]model.safetensors:  55%|█████▍    | 1.78G/3.25G [00:22<00:16, 89.3MB/s]model.safetensors:  55%|█████▌    | 1.79G/3.25G [00:22<00:16, 89.9MB/s]model.safetensors:  56%|█████▌    | 1.80G/3.25G [00:22<00:15, 90.3MB/s]model.safetensors:  56%|█████▌    | 1.81G/3.25G [00:22<00:15, 90.5MB/s]model.safetensors:  56%|█████▌    | 1.82G/3.25G [00:22<00:15, 90.6MB/s]model.safetensors:  57%|█████▋    | 1.84G/3.25G [00:22<00:15, 90.7MB/s]model.safetensors:  57%|█████▋    | 1.85G/3.25G [00:22<00:15, 90.8MB/s]model.safetensors:  57%|█████▋    | 1.86G/3.25G [00:22<00:15, 91.1MB/s]model.safetensors:  57%|█████▋    | 1.87G/3.25G [00:23<00:15, 90.5MB/s]model.safetensors:  58%|█████▊    | 1.88G/3.25G [00:23<00:15, 91.2MB/s]model.safetensors:  58%|█████▊    | 1.89G/3.25G [00:23<00:14, 91.4MB/s]model.safetensors:  58%|█████▊    | 1.90G/3.25G [00:23<00:14, 91.8MB/s]model.safetensors:  59%|█████▉    | 1.91G/3.25G [00:23<00:14, 91.4MB/s]model.safetensors:  59%|█████▉    | 1.92G/3.25G [00:23<00:14, 91.2MB/s]model.safetensors:  59%|█████▉    | 1.93G/3.25G [00:23<00:14, 91.1MB/s]model.safetensors:  60%|█████▉    | 1.94G/3.25G [00:23<00:14, 91.1MB/s]model.safetensors:  60%|██████    | 1.95G/3.25G [00:23<00:14, 90.3MB/s]model.safetensors:  60%|██████    | 1.96G/3.25G [00:24<00:14, 91.1MB/s]model.safetensors:  61%|██████    | 1.97G/3.25G [00:24<00:13, 91.7MB/s]model.safetensors:  61%|██████    | 1.98G/3.25G [00:24<00:13, 92.2MB/s]model.safetensors:  61%|██████▏   | 1.99G/3.25G [00:24<00:13, 93.3MB/s]model.safetensors:  62%|██████▏   | 2.00G/3.25G [00:24<00:13, 91.9MB/s]model.safetensors:  62%|██████▏   | 2.01G/3.25G [00:24<00:13, 93.0MB/s]model.safetensors:  62%|██████▏   | 2.02G/3.25G [00:24<00:13, 92.2MB/s]model.safetensors:  63%|██████▎   | 2.03G/3.25G [00:24<00:13, 91.6MB/s]model.safetensors:  63%|██████▎   | 2.04G/3.25G [00:24<00:13, 91.4MB/s]model.safetensors:  63%|██████▎   | 2.06G/3.25G [00:25<00:13, 91.3MB/s]model.safetensors:  64%|██████▎   | 2.07G/3.25G [00:25<00:12, 91.1MB/s]model.safetensors:  64%|██████▍   | 2.08G/3.25G [00:25<00:20, 56.1MB/s]model.safetensors:  64%|██████▍   | 2.09G/3.25G [00:25<00:18, 63.3MB/s]model.safetensors:  65%|██████▍   | 2.10G/3.25G [00:25<00:16, 69.5MB/s]model.safetensors:  65%|██████▍   | 2.11G/3.25G [00:25<00:15, 74.8MB/s]model.safetensors:  65%|██████▌   | 2.12G/3.25G [00:26<00:14, 78.9MB/s]model.safetensors:  66%|██████▌   | 2.13G/3.25G [00:26<00:13, 82.2MB/s]model.safetensors:  66%|██████▌   | 2.14G/3.25G [00:26<00:13, 84.7MB/s]model.safetensors:  66%|██████▌   | 2.15G/3.25G [00:26<00:12, 86.4MB/s]model.safetensors:  67%|██████▋   | 2.16G/3.25G [00:26<00:12, 87.7MB/s]model.safetensors:  67%|██████▋   | 2.17G/3.25G [00:26<00:12, 88.8MB/s]model.safetensors:  67%|██████▋   | 2.18G/3.25G [00:26<00:11, 89.4MB/s]model.safetensors:  67%|██████▋   | 2.19G/3.25G [00:26<00:11, 89.8MB/s]model.safetensors:  68%|██████▊   | 2.20G/3.25G [00:26<00:11, 90.1MB/s]model.safetensors:  68%|██████▊   | 2.21G/3.25G [00:27<00:11, 89.9MB/s]model.safetensors:  68%|██████▊   | 2.22G/3.25G [00:27<00:11, 90.9MB/s]model.safetensors:  69%|██████▉   | 2.23G/3.25G [00:27<00:11, 91.5MB/s]model.safetensors:  69%|██████▉   | 2.24G/3.25G [00:27<00:10, 92.0MB/s]model.safetensors:  69%|██████▉   | 2.25G/3.25G [00:27<00:10, 90.6MB/s]model.safetensors:  70%|██████▉   | 2.26G/3.25G [00:27<00:10, 90.0MB/s]model.safetensors:  70%|███████   | 2.28G/3.25G [00:27<00:10, 90.9MB/s]model.safetensors:  70%|███████   | 2.29G/3.25G [00:27<00:10, 89.3MB/s]model.safetensors:  71%|███████   | 2.30G/3.25G [00:27<00:10, 89.3MB/s]model.safetensors:  71%|███████   | 2.31G/3.25G [00:28<00:10, 90.1MB/s]model.safetensors:  71%|███████▏  | 2.32G/3.25G [00:28<00:10, 89.5MB/s]model.safetensors:  72%|███████▏  | 2.33G/3.25G [00:28<00:10, 90.1MB/s]model.safetensors:  72%|███████▏  | 2.34G/3.25G [00:28<00:09, 90.9MB/s]model.safetensors:  72%|███████▏  | 2.35G/3.25G [00:28<00:09, 91.0MB/s]model.safetensors:  73%|███████▎  | 2.36G/3.25G [00:28<00:09, 91.0MB/s]model.safetensors:  73%|███████▎  | 2.37G/3.25G [00:28<00:09, 91.0MB/s]model.safetensors:  73%|███████▎  | 2.38G/3.25G [00:28<00:09, 91.0MB/s]model.safetensors:  74%|███████▎  | 2.39G/3.25G [00:29<00:09, 91.1MB/s]model.safetensors:  74%|███████▍  | 2.40G/3.25G [00:29<00:09, 90.8MB/s]model.safetensors:  74%|███████▍  | 2.41G/3.25G [00:29<00:09, 91.2MB/s]model.safetensors:  75%|███████▍  | 2.42G/3.25G [00:29<00:08, 91.7MB/s]model.safetensors:  75%|███████▍  | 2.43G/3.25G [00:29<00:08, 91.4MB/s]model.safetensors:  75%|███████▌  | 2.44G/3.25G [00:29<00:08, 89.5MB/s]model.safetensors:  76%|███████▌  | 2.45G/3.25G [00:29<00:08, 89.9MB/s]model.safetensors:  76%|███████▌  | 2.46G/3.25G [00:29<00:08, 90.7MB/s]model.safetensors:  76%|███████▌  | 2.47G/3.25G [00:29<00:08, 90.9MB/s]model.safetensors:  77%|███████▋  | 2.49G/3.25G [00:30<00:08, 90.9MB/s]model.safetensors:  77%|███████▋  | 2.50G/3.25G [00:30<00:08, 91.1MB/s]model.safetensors:  77%|███████▋  | 2.51G/3.25G [00:30<00:08, 91.6MB/s]model.safetensors:  78%|███████▊  | 2.52G/3.25G [00:30<00:07, 92.0MB/s]model.safetensors:  78%|███████▊  | 2.53G/3.25G [00:30<00:07, 92.2MB/s]model.safetensors:  78%|███████▊  | 2.54G/3.25G [00:30<00:07, 92.4MB/s]model.safetensors:  78%|███████▊  | 2.55G/3.25G [00:30<00:07, 92.5MB/s]model.safetensors:  79%|███████▉  | 2.56G/3.25G [00:30<00:07, 92.8MB/s]model.safetensors:  79%|███████▉  | 2.57G/3.25G [00:30<00:07, 92.8MB/s]model.safetensors:  79%|███████▉  | 2.58G/3.25G [00:31<00:07, 92.6MB/s]model.safetensors:  80%|███████▉  | 2.59G/3.25G [00:31<00:07, 92.3MB/s]model.safetensors:  80%|████████  | 2.60G/3.25G [00:31<00:06, 92.4MB/s]model.safetensors:  80%|████████  | 2.61G/3.25G [00:31<00:06, 93.1MB/s]model.safetensors:  81%|████████  | 2.62G/3.25G [00:31<00:06, 93.2MB/s]model.safetensors:  81%|████████  | 2.63G/3.25G [00:31<00:06, 92.5MB/s]model.safetensors:  81%|████████▏ | 2.64G/3.25G [00:31<00:06, 92.7MB/s]model.safetensors:  82%|████████▏ | 2.65G/3.25G [00:31<00:06, 92.8MB/s]model.safetensors:  82%|████████▏ | 2.66G/3.25G [00:31<00:06, 92.8MB/s]model.safetensors:  82%|████████▏ | 2.67G/3.25G [00:32<00:06, 92.3MB/s]model.safetensors:  83%|████████▎ | 2.68G/3.25G [00:32<00:06, 92.6MB/s]model.safetensors:  83%|████████▎ | 2.69G/3.25G [00:32<00:05, 92.6MB/s]model.safetensors:  83%|████████▎ | 2.71G/3.25G [00:32<00:05, 92.7MB/s]model.safetensors:  84%|████████▎ | 2.72G/3.25G [00:32<00:05, 92.9MB/s]model.safetensors:  84%|████████▍ | 2.73G/3.25G [00:32<00:05, 93.0MB/s]model.safetensors:  84%|████████▍ | 2.74G/3.25G [00:32<00:05, 93.0MB/s]model.safetensors:  85%|████████▍ | 2.75G/3.25G [00:32<00:05, 92.9MB/s]model.safetensors:  85%|████████▍ | 2.76G/3.25G [00:32<00:05, 92.3MB/s]model.safetensors:  85%|████████▌ | 2.77G/3.25G [00:33<00:05, 91.2MB/s]model.safetensors:  86%|████████▌ | 2.78G/3.25G [00:33<00:05, 91.0MB/s]model.safetensors:  86%|████████▌ | 2.79G/3.25G [00:33<00:05, 89.9MB/s]model.safetensors:  86%|████████▌ | 2.80G/3.25G [00:33<00:04, 90.3MB/s]model.safetensors:  87%|████████▋ | 2.81G/3.25G [00:33<00:04, 90.7MB/s]model.safetensors:  87%|████████▋ | 2.82G/3.25G [00:33<00:04, 90.4MB/s]model.safetensors:  87%|████████▋ | 2.83G/3.25G [00:33<00:04, 89.3MB/s]model.safetensors:  88%|████████▊ | 2.84G/3.25G [00:33<00:04, 89.8MB/s]model.safetensors:  88%|████████▊ | 2.85G/3.25G [00:34<00:04, 90.1MB/s]model.safetensors:  88%|████████▊ | 2.86G/3.25G [00:34<00:04, 90.7MB/s]model.safetensors:  88%|████████▊ | 2.87G/3.25G [00:34<00:04, 91.2MB/s]model.safetensors:  89%|████████▉ | 2.88G/3.25G [00:34<00:03, 91.6MB/s]model.safetensors:  89%|████████▉ | 2.89G/3.25G [00:34<00:03, 91.2MB/s]model.safetensors:  89%|████████▉ | 2.90G/3.25G [00:34<00:03, 90.9MB/s]model.safetensors:  90%|████████▉ | 2.92G/3.25G [00:34<00:03, 90.9MB/s]model.safetensors:  90%|█████████ | 2.93G/3.25G [00:34<00:03, 90.7MB/s]model.safetensors:  90%|█████████ | 2.94G/3.25G [00:34<00:03, 90.8MB/s]model.safetensors:  91%|█████████ | 2.95G/3.25G [00:35<00:03, 90.9MB/s]model.safetensors:  91%|█████████ | 2.96G/3.25G [00:35<00:03, 91.3MB/s]model.safetensors:  91%|█████████▏| 2.97G/3.25G [00:35<00:03, 91.8MB/s]model.safetensors:  92%|█████████▏| 2.98G/3.25G [00:35<00:02, 91.9MB/s]model.safetensors:  92%|█████████▏| 2.99G/3.25G [00:35<00:02, 91.7MB/s]model.safetensors:  92%|█████████▏| 3.00G/3.25G [00:35<00:02, 92.0MB/s]model.safetensors:  93%|█████████▎| 3.01G/3.25G [00:35<00:02, 92.2MB/s]model.safetensors:  93%|█████████▎| 3.02G/3.25G [00:35<00:02, 92.3MB/s]model.safetensors:  93%|█████████▎| 3.03G/3.25G [00:35<00:02, 91.4MB/s]model.safetensors:  94%|█████████▎| 3.04G/3.25G [00:36<00:02, 91.2MB/s]model.safetensors:  94%|█████████▍| 3.05G/3.25G [00:36<00:02, 91.1MB/s]model.safetensors:  94%|█████████▍| 3.06G/3.25G [00:36<00:02, 91.1MB/s]model.safetensors:  95%|█████████▍| 3.07G/3.25G [00:36<00:01, 90.9MB/s]model.safetensors:  95%|█████████▍| 3.08G/3.25G [00:36<00:01, 90.6MB/s]model.safetensors:  95%|█████████▌| 3.09G/3.25G [00:36<00:01, 90.8MB/s]model.safetensors:  96%|█████████▌| 3.10G/3.25G [00:36<00:01, 90.8MB/s]model.safetensors:  96%|█████████▌| 3.11G/3.25G [00:36<00:01, 90.7MB/s]model.safetensors:  96%|█████████▌| 3.12G/3.25G [00:37<00:01, 90.8MB/s]model.safetensors:  97%|█████████▋| 3.14G/3.25G [00:37<00:01, 90.9MB/s]model.safetensors:  97%|█████████▋| 3.15G/3.25G [00:37<00:01, 90.9MB/s]model.safetensors:  97%|█████████▋| 3.16G/3.25G [00:37<00:00, 91.0MB/s]model.safetensors:  98%|█████████▊| 3.17G/3.25G [00:37<00:00, 90.8MB/s]model.safetensors:  98%|█████████▊| 3.18G/3.25G [00:37<00:00, 90.8MB/s]model.safetensors:  98%|█████████▊| 3.19G/3.25G [00:37<00:00, 90.6MB/s]model.safetensors:  98%|█████████▊| 3.20G/3.25G [00:37<00:00, 90.6MB/s]model.safetensors:  99%|█████████▉| 3.21G/3.25G [00:37<00:00, 90.4MB/s]model.safetensors:  99%|█████████▉| 3.22G/3.25G [00:38<00:00, 90.0MB/s]model.safetensors:  99%|█████████▉| 3.23G/3.25G [00:38<00:00, 89.3MB/s]model.safetensors: 100%|█████████▉| 3.24G/3.25G [00:38<00:00, 87.6MB/s]model.safetensors: 100%|██████████| 3.25G/3.25G [00:38<00:00, 84.5MB/s]
+generation_config.json:   0%|          | 0.00/124 [00:00<?, ?B/s]generation_config.json: 100%|██████████| 124/124 [00:00<00:00, 14.0kB/s]
+You are resizing the embedding layer without providing a `pad_to_multiple_of` parameter. This means that the new embedding dimension will be 50258. This might induce some performance reduction as *Tensor Cores* will not be available. For more details about this, or help on choosing the correct value for resizing, refer to this guide: https://docs.nvidia.com/deeplearning/performance/dl-performance-matrix-multiplication/index.html#requirements-tc
+[2025-07-31 15:32:31,558] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed info: version=0.12.6, git-hash=unknown, git-branch=unknown
+[2025-07-31 15:32:31,870] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2025-07-31 15:32:31,872] [INFO] [logging.py:96:log_dist] [Rank 0] Using client Optimizer as basic optimizer
+[2025-07-31 15:32:31,872] [INFO] [logging.py:96:log_dist] [Rank 0] Removing param_group that has no 'params' in the basic Optimizer
+[2025-07-31 15:32:31,902] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Basic Optimizer = AdamW
+[2025-07-31 15:32:31,902] [INFO] [utils.py:56:is_zero_supported_optimizer] Checking ZeRO support for optimizer=AdamW type=<class 'torch.optim.adamw.AdamW'>
+[2025-07-31 15:32:31,902] [INFO] [logging.py:96:log_dist] [Rank 0] Creating torch.bfloat16 ZeRO stage 2 optimizer
+[2025-07-31 15:32:31,903] [INFO] [stage_1_and_2.py:148:__init__] Reduce bucket size 500,000,000
+[2025-07-31 15:32:31,903] [INFO] [stage_1_and_2.py:149:__init__] Allgather bucket size 500,000,000
+[2025-07-31 15:32:31,903] [INFO] [stage_1_and_2.py:150:__init__] CPU Offload: False
+[2025-07-31 15:32:31,903] [INFO] [stage_1_and_2.py:151:__init__] Round robin gradient partitioning: False
+[2025-07-31 15:32:32,586] [INFO] [utils.py:791:see_memory_usage] Before initializing optimizer states
+[2025-07-31 15:32:32,587] [INFO] [utils.py:792:see_memory_usage] MA 4.36 GB         Max_MA 5.8 GB         CA 5.81 GB         Max_CA 6 GB 
+[2025-07-31 15:32:32,587] [INFO] [utils.py:799:see_memory_usage] CPU Virtual Memory:  used = 28.48 GB, percent = 15.1%
+[2025-07-31 15:32:32,989] [INFO] [utils.py:791:see_memory_usage] After initializing optimizer states
+[2025-07-31 15:32:32,990] [INFO] [utils.py:792:see_memory_usage] MA 10.13 GB         Max_MA 15.89 GB         CA 17.35 GB         Max_CA 17 GB 
+[2025-07-31 15:32:32,990] [INFO] [utils.py:799:see_memory_usage] CPU Virtual Memory:  used = 28.45 GB, percent = 15.1%
+[2025-07-31 15:32:32,991] [INFO] [stage_1_and_2.py:516:__init__] optimizer state initialized
+[2025-07-31 15:32:33,149] [INFO] [utils.py:791:see_memory_usage] After initializing ZeRO optimizer
+[2025-07-31 15:32:33,150] [INFO] [utils.py:792:see_memory_usage] MA 10.13 GB         Max_MA 10.13 GB         CA 17.35 GB         Max_CA 17 GB 
+[2025-07-31 15:32:33,150] [INFO] [utils.py:799:see_memory_usage] CPU Virtual Memory:  used = 28.45 GB, percent = 15.1%
+[2025-07-31 15:32:33,157] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed Final Optimizer = AdamW
+[2025-07-31 15:32:33,157] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed using client LR scheduler
+[2025-07-31 15:32:33,158] [INFO] [logging.py:96:log_dist] [Rank 0] DeepSpeed LR Scheduler = None
+[2025-07-31 15:32:33,158] [INFO] [logging.py:96:log_dist] [Rank 0] step=0, skipped=0, lr=[3e-06], mom=[(0.9, 0.999)]
+[2025-07-31 15:32:33,158] [INFO] [config.py:984:print] DeepSpeedEngine configuration:
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'thread_count': 1, 'single_submit': False, 'overlap_events': True}
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   amp_enabled .................. False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   amp_params ................... False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   bfloat16_enabled ............. True
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   checkpoint_parallel_write_pipeline  False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   checkpoint_tag_validation_enabled  True
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   checkpoint_tag_validation_fail  False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x7da8c8ef8130>
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   communication_data_type ...... None
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   curriculum_enabled_legacy .... False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   curriculum_params_legacy ..... False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'curriculum_learning': {'enabled': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   data_efficiency_enabled ...... False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   dataloader_drop_last ......... False
+[2025-07-31 15:32:33,159] [INFO] [config.py:988:print]   disable_allgather ............ False
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   dump_state ................... False
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   dynamic_loss_scale_args ...... None
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_enabled ........... False
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_gas_boundary_resolution  1
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_layer_num ......... 0
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_max_iter .......... 100
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_stability ......... 1e-06
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_tol ............... 0.01
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   eigenvalue_verbose ........... False
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   elasticity_enabled ........... False
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   fp16_auto_cast ............... None
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   fp16_enabled ................. False
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   fp16_master_weights_and_gradients  False
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   global_rank .................. 0
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   grad_accum_dtype ............. None
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   gradient_accumulation_steps .. 128
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   gradient_clipping ............ 0.0
+[2025-07-31 15:32:33,160] [INFO] [config.py:988:print]   gradient_predivide_factor .... 1.0
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   graph_harvesting ............. False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   initial_dynamic_scale ........ 1
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   load_universal_checkpoint .... False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   loss_scale ................... 1.0
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   memory_breakdown ............. False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   mics_hierarchial_params_gather  False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   mics_shard_size .............. -1
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') enabled=False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   optimizer_legacy_fusion ...... False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   optimizer_name ............... None
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   optimizer_params ............. None
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0, 'pipe_partitioned': True, 'grad_partitioned': True}
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   pld_enabled .................. False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   pld_params ................... False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   prescale_gradients ........... False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   scheduler_name ............... None
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   scheduler_params ............. None
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   seq_parallel_communication_data_type  torch.float32
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   sparse_attention ............. None
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   sparse_gradients_enabled ..... False
+[2025-07-31 15:32:33,161] [INFO] [config.py:988:print]   steps_per_print .............. inf
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   train_batch_size ............. 512
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   train_micro_batch_size_per_gpu  4
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   use_data_before_expert_parallel_  False
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   use_node_local_storage ....... False
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   wall_clock_breakdown ......... False
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   weight_quantization_config ... None
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   world_size ................... 1
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   zero_allow_untested_optimizer  True
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   zero_config .................. stage=2 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=500,000,000 use_multi_rank_bucket_allreduce=True allgather_partitions=True allgather_bucket_size=500,000,000 overlap_comm=False load_from_fp32_weights=True elastic_checkpoint=False offload_param=DeepSpeedZeroOffloadParamConfig(device='none', nvme_path=None, buffer_count=5, buffer_size=100,000,000, max_in_cpu=1,000,000,000, pin_memory=False) offload_optimizer=DeepSpeedZeroOffloadOptimizerConfig(device='none', nvme_path=None, buffer_count=4, pin_memory=False, pipeline=False, pipeline_read=False, pipeline_write=False, fast_init=False, ratio=1.0) sub_group_size=1,000,000,000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50,000,000 param_persistence_threshold=100,000 model_persistence_threshold=sys.maxsize max_live_parameters=1,000,000,000 max_reuse_distance=1,000,000,000 gather_16bit_weights_on_model_save=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_nontrainable_weights=False zero_quantized_gradients=False mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True pipeline_loading_checkpoint=False override_module_apply=True
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   zero_enabled ................. True
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   zero_force_ds_cpu_optimizer .. True
+[2025-07-31 15:32:33,162] [INFO] [config.py:988:print]   zero_optimization_stage ...... 2
+[2025-07-31 15:32:33,162] [INFO] [config.py:974:print_user_config]   json = {
+    "train_batch_size": 512, 
+    "train_micro_batch_size_per_gpu": 4, 
+    "gradient_accumulation_steps": 128, 
+    "zero_optimization": {
+        "stage": 2, 
+        "offload_optimizer": {
+            "device": "none", 
+            "nvme_path": null
+        }, 
+        "offload_param": {
+            "device": "none", 
+            "nvme_path": null
+        }, 
+        "stage3_gather_16bit_weights_on_model_save": false
+    }, 
+    "steps_per_print": inf, 
+    "bf16": {
+        "enabled": true
+    }, 
+    "fp16": {
+        "enabled": false
+    }, 
+    "zero_allow_untested_optimizer": true
+}
+===training model===
+epoch: 0
+[DEBUG] loss = 2.766
+[DEBUG] query_reference_response_token.max() = 50257
+[DEBUG] query_reference_response_token shape = torch.Size([4, 562])
+[DEBUG] loss = 2.734
+[DEBUG] query_reference_response_token.max() = 50257
+[DEBUG] query_reference_response_token shape = torch.Size([4, 562])
+Traceback (most recent call last):
+  File "/home/hail/Distribution_RLHF/summarize_from_feedback_details/summarize_from_feedback_details/sft_gpt2_newData.py", line 413, in <module>
+    accelerator.backward(loss)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/accelerate/accelerator.py", line 1899, in backward
+    self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/accelerate/utils/deepspeed.py", line 167, in backward
+    self.engine.backward(loss, **kwargs)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/engine.py", line 1955, in backward
+    self.optimizer.backward(loss, retain_graph=retain_graph)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 2019, in backward
+    self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 63, in backward
+    scaled_loss.backward(retain_graph=retain_graph)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/torch/_tensor.py", line 492, in backward
+    torch.autograd.backward(
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/torch/autograd/__init__.py", line 251, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 865, in reduce_partition_and_remove_grads
+    self.reduce_ready_partitions_and_remove_grads(param, i)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 1377, in reduce_ready_partitions_and_remove_grads
+    self.reduce_independent_p_g_buckets_and_remove_grads(param, i)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 893, in reduce_independent_p_g_buckets_and_remove_grads
+    self.reduce_ipg_grads()
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 1364, in reduce_ipg_grads
+    self.copy_grads_in_partition(param)
+  File "/home/hail/anaconda3/envs/hk_sff_39/lib/python3.9/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 1304, in copy_grads_in_partition
+    self.grads_in_partition = torch.empty(int(total_size),
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.44 GiB. GPU 0 has a total capacty of 23.53 GiB of which 1.06 GiB is free. Including non-PyTorch memory, this process has 22.45 GiB memory in use. Of the allocated memory 15.72 GiB is allocated by PyTorch, and 6.06 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+wandb: Waiting for W&B process to finish... (failed 1). Press Control-C to abort syncing.
+wandb: 
+wandb: Run history:
+wandb: global_step ▁
+wandb: 
+wandb: Run summary:
+wandb: global_step 0
+wandb: 
+wandb: 🚀 View run sft_gpt2_newData__1__1753943487 at: https://wandb.ai/hails/tldr_summarize/runs/8xny3eps
+wandb: Synced 7 W&B file(s), 0 media file(s), 44 artifact file(s) and 2 other file(s)
+wandb: Find logs at: ./wandb/run-20250731_153136-8xny3eps/logs

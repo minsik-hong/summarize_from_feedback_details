@@ -75,11 +75,11 @@ class Args:
     """Number of epochs to train"""
     num_updates: Optional[int] = None
     """The number of updates to train"""
-    gradient_accumulation_steps: int = 8
+    gradient_accumulation_steps: int = 64 #8
     """The number of gradient accumulation steps"""
-    local_micro_batch_size: Optional[int] = 1
+    local_micro_batch_size: Optional[int] = 4 #1
     """The micro batch size per GPU (HF's `per_device_train_batch_size`)"""
-    total_episodes: Optional[int] = 92832
+    total_episodes: Optional[int] = 9283 #92832
     """The total number of episodes in the dataset"""
     micro_batch_size: Optional[int] = None
     """The micro batch size across devices (HF's `per_device_train_batch_size` * `world_size`)"""
@@ -282,10 +282,6 @@ def first_true_indices(bools, dtype=torch.long):
 # QR 버전 
 
 def get_quantile_expected_reward(model, query_responses, tokenizer, context_length=0):
-    """
-    QuantileModel로부터 평균 quantile reward를 추출하고,
-    마지막 유효 토큰의 reward만 선택하여 [2B] 형태의 scalar reward로 반환.
-    """
     attention_mask = query_responses != tokenizer.pad_token_id
     # position_ids = attention_mask.cumsum(1) - attention_mask.long()  # exclusive cumsum
     input_ids = torch.masked_fill(query_responses, ~attention_mask, 0)
@@ -318,18 +314,30 @@ def get_quantile_expected_reward(model, query_responses, tokenizer, context_leng
     # logits [2B, T, N] 형태로 반환
     return quantile_logits, context_length
 
-# QR 버전 Loss 함수 
-def quantile_huber_loss(preds: torch.Tensor, targets: torch.Tensor):
+## QR 버전 Loss 함수 
+# def quantile_huber_loss(preds: torch.Tensor, targets: torch.Tensor):
+#     td_errors = targets.unsqueeze(1) - preds  # [B, N]
+#     huber_loss = torch.where(
+#         td_errors.abs() <= 1.0,
+#         0.5 * td_errors.pow(2),
+#         td_errors.abs() - 0.5
+#     )
+#     device = preds.device
+#     n_quantiles = preds.size(1)  # N 추출
+#     taus = torch.linspace(0.5 / n_quantiles, 1 - 0.5 / n_quantiles, n_quantiles, device=device)
+#     taus = taus.view(1, -1)  # [1, N] for broadcasting
+#     weight = (taus - (td_errors.detach() < 0).float()).abs()  # [B, N]
+#     loss = (weight * huber_loss).sum(-1).mean()
+#     return loss
+
+def quantile_huber_loss(preds: torch.Tensor, targets: torch.Tensor, taus: torch.Tensor):
+    # preds: [B, N], targets: [B], taus: [N]
     td_errors = targets.unsqueeze(1) - preds  # [B, N]
     huber_loss = torch.where(
-        td_errors.abs() <= 1.0,
-        0.5 * td_errors.pow(2),
-        td_errors.abs() - 0.5
-    )
-    device = preds.device
-    n_quantiles = preds.size(1)  # N 추출
-    taus = torch.linspace(0.5 / n_quantiles, 1 - 0.5 / n_quantiles, n_quantiles, device=device)
-    taus = taus.view(1, -1)  # [1, N] for broadcasting
+        td_errors.abs() <= 1.0, # condition
+        0.5 * td_errors.pow(2), # true case
+        td_errors.abs() - 0.5   # false case
+    )   
     weight = (taus - (td_errors.detach() < 0).float()).abs()  # [B, N]
     loss = (weight * huber_loss).sum(-1).mean()
     return loss
@@ -345,7 +353,7 @@ def evaluate(args: Args, accelerator, tokenizer, model, dataloader, eval_split=i
             query_responses = torch.cat((data["query_chosen_token"], data["query_rejected_token"]), dim=0)
             with accelerator.accumulate(model):
 
-                num = 0
+            
                 # 기존 코드
                 # predicted_reward = get_reward(model, query_responses, tokenizer)# [2B, T, 1]
                 
@@ -553,6 +561,7 @@ if __name__ == "__main__":
 
     accelerator.print("===training model===")
     losses = torch.zeros((args.gradient_accumulation_steps,), device=device)
+    pairwise_losses = torch.zeros((args.gradient_accumulation_steps,), device=device) # pairwise loss
     accuracies = torch.zeros((args.gradient_accumulation_steps,), device=device)
     reward_preferreds = torch.zeros((args.gradient_accumulation_steps,), device=device)
     reward_rejecteds = torch.zeros((args.gradient_accumulation_steps,), device=device)
@@ -567,56 +576,75 @@ if __name__ == "__main__":
             global_step += args.micro_batch_size
             query_responses = torch.cat((data["query_chosen_token"], data["query_rejected_token"]), dim=0)
             with accelerator.accumulate(model):
+                # [2B, T, N] -> 전체 quantile logits
+                quantile_logits, context_length = get_quantile_expected_reward(model, query_responses, tokenizer)  
 
-                # =========QR 코드======= 
-                quantile_logits, context_length_2 = get_quantile_expected_reward(model, query_responses, tokenizer) # [2B]
-                # quantile_logits = [2, 638, 10]
-        
-                # quantile expected value -> [2B, T, 1], 
-                
-                quantile_expected_logits = quantile_logits.mean(dim=-1, keepdim=True)
-                # quantile_expected_logits = [2, 638, 1]
-
-                # 마지막 유효 토큰 인덱스 계산
+                # 마지막 토큰 기준 추출
                 sequence_lengths = (
-                    first_true_indices(query_responses[:, context_length_2:] == tokenizer.pad_token_id)
-                    - 1 + context_length_2
+                    first_true_indices(query_responses[:, context_length:] == tokenizer.pad_token_id) - 1 + context_length
                 )  # [2B]
-
-                # 마지막 토큰의 평균 reward 추출 -> [2B]
+                
                 batch_indices = torch.arange(quantile_logits.size(0), device=quantile_logits.device)
-                quantile_expected_rewards = quantile_expected_logits[batch_indices, sequence_lengths].squeeze(-1)  # [2B]
-                 # ======================
-                
+                quantile_last_token = quantile_logits[batch_indices, sequence_lengths]  # [2B, N]
 
-                # Split
-                chosen_rewards = quantile_expected_rewards[:data['query_chosen_token'].shape[0]]  # [B, N]
-                rejected_rewards = quantile_expected_rewards[data['query_chosen_token'].shape[0]:]  # [B, N]
+                quantile_chosen = quantile_last_token[:data['query_chosen_token'].shape[0]]  # [B, N]
+                quantile_rejected = quantile_last_token[data['query_chosen_token'].shape[0]:]  # [B, N]
 
-                # pairwise loss 계산
-                accuracy = (chosen_rewards > rejected_rewards).float().mean()
+                # Pairwise Loss용 scalar reward = 각 샘플 quantile 평균 (scalar 용도)
+                chosen_rewards = quantile_chosen.mean(dim=-1)  # [B]
+                rejected_rewards = quantile_rejected.mean(dim=-1)  # [B]
+
                 pairwise_loss = -F.logsigmoid(chosen_rewards - rejected_rewards).mean()
+                accuracy = (chosen_rewards > rejected_rewards).float().mean()
 
-                # Quantile huber loss 계산
-                targets = torch.cat([chosen_rewards.detach(), rejected_rewards.detach()], dim=0)  # [2B]
-                preds = torch.cat([chosen_rewards, rejected_rewards], dim=0)  # [2B, N]
+                # Quantile Huber Loss — target [B, N]
+                # [0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95]
+                #
+                num_quantiles = model.n_quantiles
+                taus = torch.linspace(
+                    0 + 1 / (2 * num_quantiles),
+                    1 - 1 / (2 * num_quantiles),
+                    num_quantiles,
+                    device=quantile_chosen.device
+                )
+
+
+                # # expected QR target
+                # target_chosen = chosen_rewards.detach()
+                # target_rejected = rejected_rewards.detach()
                 
-                # preds 차원 확인 및 수정
-                if preds.dim() == 1:
-                    preds = preds.unsqueeze(1)  # [B] -> [B, 1]
                 
-                huber_loss = quantile_huber_loss(preds, targets)
+                # # gradients 흐름을 차단하여 설정
+                # with torch.no_grad():
+                #     target_chosen = chosen_rewards
+                #     target_rejected = rejected_rewards
+                    
+                #     pred_quantile_chosen = quantile_chosen.detach()
+                #     pred_quantile_rejected = quantile_rejected.detach()
 
+                # Quantile Huber Loss
+                chosen_qr_loss = quantile_huber_loss(quantile_chosen, chosen_rewards, taus)
+                rejected_qr_loss = quantile_huber_loss(quantile_rejected, rejected_rewards, taus)
+                
+                qr_weight = 0.1
+                qr_loss = (chosen_qr_loss + rejected_qr_loss) / 2
+                loss = qr_weight * qr_loss + pairwise_loss
+                # loss = pairwise_loss
 
-                # loss 결합
-                loss = pairwise_loss + huber_loss
+                #
+                # # 최종 Loss 조합 (필요 시 pairwise loss 포함)
+                # loss = qr_loss + pairwise_loss
+
 
                 accelerator.backward(loss)
                 optimizer.step()
                 optimizer.zero_grad()
                 
             losses[gradient_accumulation_idx] = loss
-            accuracies[gradient_accumulation_idx] = accuracy
+
+            pairwise_losses[gradient_accumulation_idx] = pairwise_loss
+
+            accuracies[gradient_accumulation_idx] = accuracy.mean() # multi gpu
             reward_preferreds[gradient_accumulation_idx] = chosen_rewards.mean()
             reward_rejecteds[gradient_accumulation_idx] = rejected_rewards.mean()
             gradient_accumulation_idx = (gradient_accumulation_idx + 1) % args.gradient_accumulation_steps
@@ -624,6 +652,12 @@ if __name__ == "__main__":
                 scheduler.step()
                 train_accuracy = accelerator.gather(accuracies).mean().item()
                 writer.add_scalar("train/rm/loss", accelerator.gather(losses).mean().item(), global_step)
+                writer.add_scalar("train/loss/qr_loss", accelerator.gather(qr_loss).mean().item(), global_step)
+                # writer.add_scalar("train/loss/pairwise_loss", accelerator.gather(pairwise_loss).mean().item(),
+                #                   global_step)
+                writer.add_scalar("train/loss/pairwise_loss", accelerator.gather(pairwise_losses).mean().item(),
+                                  global_step)
+
                 writer.add_scalar("train/rm/accuracy", train_accuracy, global_step)
                 writer.add_scalar(
                     "train/rm/chosen_rewards", accelerator.gather(reward_preferreds).mean().item(), global_step
@@ -769,7 +803,8 @@ if __name__ == "__main__":
         unwrapped: PreTrainedModel = accelerator.unwrap_model(model)
         accelerator.wait_for_everyone()
         if accelerator.is_main_process:
-            unwrapped.config.bias = norm_df["predicted_reward"].mean()
+            # unwrapped.config.bias = norm_df["predicted_reward"].mean()
+            unwrapped.config.bias = norm_df["quantile_expected_rewards"].mean()
             unwrapped.save_pretrained(
                 args.output_dir,
                 is_main_process=accelerator.is_main_process,

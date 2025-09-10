@@ -103,7 +103,7 @@ class Args:
     sft_model_path: str = "openai-community/gpt2-medium"
     """the path to the sft model"""
     # label_dataset: str = "vwxyzjn/summarize_from_feedback_oai_preprocessing_1706381144"
-    label_dataset: str = "imminsik/summarize_from_feedback_oai_preprocessing_gpt2_1753693335"
+    label_dataset: str = "imminsik/summarize_from_feedback_oai_preprocessing_gpt2_accuracy_1757241465"
     """the name of the dataset to use for labels in `https://huggingface.co/datasets/vwxyzjn/lm-human-preferences`"""
 
     # wandb and HF tracking configs
@@ -467,7 +467,8 @@ if __name__ == "__main__":
     dataloader = DataLoader(dataset, batch_size=args.local_micro_batch_size)
     eval_datasets = []
     eval_dataloaders = {}
-    for split in ["validation", "validation_cnndm"]:
+    # for split in ["validation", "validation_cnndm"]:
+    for split in ["validation_cnndm"]: # validation_cnndm만 사용
         validation_dataset = load_dataset(args.label_dataset, split=split).flatten()
         validation_dataset = validation_dataset.with_format(
             "torch",
